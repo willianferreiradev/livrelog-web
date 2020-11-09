@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import 'assets/css/bootstrap.min.css';
+@import 'assets/css/icons.min.css';
+@import 'assets/css/app.min.css';
+
+/* Importing Chartist Css */
+@import '~chartist/dist/chartist.css';

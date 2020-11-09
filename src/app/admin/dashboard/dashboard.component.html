@@ -1,0 +1,136 @@
+<div class="row">
+  <div class="col-xl-3 col-md-6">
+    <div class="card widget-box-two bg-purple">
+      <div class="card-body">
+        <div class="media">
+          <div class="media-body wigdet-two-content">
+            <p class="m-0 text-uppercase text-white" title="Statistics">
+              Orçamentos Hoje
+            </p>
+            <h2 class="text-white"><span data-plugin="counterup">234</span></h2>
+            <p class="text-white m-0">Solicitados por Usuários</p>
+          </div>
+          <div
+            class="avatar-lg rounded-circle bg-soft-light ml-2 align-self-center"
+          >
+            <i
+              class="mdi mdi-file-document font-24 avatar-title text-white"
+            ></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end col -->
+
+  <div class="col-xl-3 col-md-6">
+    <div class="card widget-box-two bg-info">
+      <div class="card-body">
+        <div class="media">
+          <div class="media-body wigdet-two-content">
+            <p class="m-0 text-white text-uppercase" title="User Today">
+              Mudanças Hoje
+            </p>
+            <h2 class="text-white"><span data-plugin="counterup">142</span></h2>
+            <p class="text-white m-0">Agendadas</p>
+          </div>
+          <div
+            class="avatar-lg rounded-circle bg-soft-light ml-2 align-self-center"
+          >
+            <i class="mdi mdi-truck font-24 avatar-title text-white"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end col -->
+
+  <div class="col-xl-3 col-md-6">
+    <div class="card widget-box-two bg-pink">
+      <div class="card-body">
+        <div class="media">
+          <div class="media-body wigdet-two-content">
+            <p class="m-0 text-uppercase text-white" title="Request Per Minute">
+              Novos Usuários
+            </p>
+            <h2 class="text-white"><span data-plugin="counterup">365</span></h2>
+            <p class="text-white m-0">Cadastros de Hoje</p>
+          </div>
+          <div
+            class="avatar-lg rounded-circle bg-soft-light ml-2 align-self-center"
+          >
+            <i class="mdi mdi-account font-24 avatar-title text-white"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end col -->
+
+  <div class="col-xl-3 col-md-6">
+    <div class="card widget-box-two bg-success">
+      <div class="card-body">
+        <div class="media">
+          <div class="media-body wigdet-two-content">
+            <p class="m-0 text-white text-uppercase" title="New Downloads">
+              Orçamentos Gerados
+            </p>
+            <h2 class="text-white">
+              <span data-plugin="counterup">854</span>
+              <i class="mdi mdi-arrow-up text-white font-22"></i>
+            </h2>
+            <p class="text-white m-0">Hoje por Transportadoras</p>
+          </div>
+          <div
+            class="avatar-lg rounded-circle bg-soft-light ml-2 align-self-center"
+          >
+            <i class="mdi mdi-file-compare font-24 avatar-title text-white"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end col -->
+</div>
+
+<div class="row">
+  <div class="col-xl-6">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="header-title">Orçamentos X Mudanças no Ano</h4>
+        <p class="sub-header text-truncate">
+          Comparativo de Orçamentos X Mudanças realizadas por mês.
+        </p>
+
+        <div dir="ltr">
+          <!-- <div id="overlapping-bars" class="ct-chart ct-golden-section"></div> -->
+          <x-chartist
+            [type]="type"
+            [data]="data"
+            [options]="options"
+            [events]="events"
+          ></x-chartist>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-6">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="header-title">Orçamentos X Mudanças na Semana</h4>
+        <p class="sub-header text-truncate">
+          Demonstrativo de Orçamentos X Mudanças esta semana:
+        </p>
+
+        <div dir="ltr">
+          <x-chartist
+            [type]="type"
+            [data]="data"
+            [options]="options"
+            [events]="events"
+          ></x-chartist>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
