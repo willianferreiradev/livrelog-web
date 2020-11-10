@@ -1,0 +1,24 @@
+<div class="card widget-box-two" [ngClass]="data.colorClass">
+  <div class="card-body">
+    <div class="media">
+      <div class="media-body wigdet-two-content">
+        <p class="m-0 text-uppercase text-white">
+          {{ data.title }}
+        </p>
+        <h2 class="text-white">
+          <span data-plugin="counterup">{{ data.number }}</span>
+          <ng-content></ng-content>
+        </h2>
+        <p class="text-white m-0">{{ data.subtitle }}</p>
+      </div>
+      <div
+        class="avatar-lg rounded-circle bg-soft-light ml-2 align-self-center"
+      >
+        <i
+          class="mdi font-24 avatar-title text-white"
+          [ngClass]="data.icon.name"
+        ></i>
+      </div>
+    </div>
+  </div>
+</div>

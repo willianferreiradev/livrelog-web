@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './components/footer/footer.component';
+import { InformationBoxComponent } from './components/information-box/information-box.component';
 
 
 
 @NgModule({
   declarations: [
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    InformationBoxComponent
   ],
   imports: [
     CommonModule,
@@ -17,7 +19,8 @@ import { FooterComponent } from './components/footer/footer.component';
   ],
   exports: [
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    InformationBoxComponent
   ]
 })
 export class SharedModule { }

@@ -6,6 +6,8 @@ import {
 } from 'chartist';
 import { ChartEvent, ChartType } from 'ng-chartist';
 
+import { TitlePageService } from '../../shared/services/title-page.service';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -58,9 +60,53 @@ export class DashboardComponent implements OnInit {
     }
   };
 
-  constructor() { }
+  constructor(
+    private titleService: TitlePageService
+  ) { }
 
   ngOnInit(): void {
+    this.titleService.titleSubject.next('Bem vindo Thiago Ventura');
+  }
+
+  getInformationBoxes() {
+    return [
+      {
+        title: 'Orçamentos Hoje',
+        number: 0,
+        subtitle: 'Solicitados por Usuários',
+        colorClass: 'bg-purple',
+        icon: {
+          name: 'mdi-file-document'
+        }
+      },
+      {
+        title: 'Mudanças Hoje',
+        number: 0,
+        subtitle: 'Agendadas',
+        colorClass: 'bg-info',
+        icon: {
+          name: 'mdi-truck'
+        }
+      },
+      {
+        title: 'Novos Usuários',
+        number: 0,
+        subtitle: 'Cadastros de Hoje',
+        colorClass: 'bg-pink',
+        icon: {
+          name: ' mdi-account'
+        }
+      },
+      {
+        title: 'Orçamentos Gerados',
+        number: 0,
+        subtitle: 'Hoje por Transportadoras',
+        colorClass: 'bg-success',
+        icon: {
+          name: 'mdi-file-compare'
+        }
+      },
+    ];
   }
 
 }
