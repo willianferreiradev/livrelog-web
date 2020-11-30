@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { TitlePageService } from './shared/services/title-page.service';
 
+import { TitlePageService } from '@services/title-page.service';
+import { LoaderService } from '@services/loader.service';
+
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,11 +12,23 @@ import { TitlePageService } from './shared/services/title-page.service';
 export class AppComponent implements OnInit {
   title: string;
 
-  constructor(private titleService: TitlePageService) {
+  constructor(
+    private titleService: TitlePageService,
+    private spinner: NgxSpinnerService,
+    private loader: LoaderService,
+    ) {
 
   }
 
   ngOnInit(): void {
     this.titleService.titleSubject.subscribe(title => this.title = title);
+    this.loader.loaderState.subscribe(state => {
+      state === true ? this.spinner.show() : this.spinner.hide();
+    });
+  }
+
+  isAuthRoute(): boolean {
+    console.log(location.href);
+    return true;
   }
 }

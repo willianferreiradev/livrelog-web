@@ -65,10 +65,10 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.titleService.titleSubject.next('Bem vindo Thiago Ventura');
+    this.titleService.titleSubject.next(`Bem vindo ${this.user.name}`);
   }
 
-  getInformationBoxes() {
+  getInformationBoxes(): any {
     return [
       {
         title: 'Orçamentos Hoje',

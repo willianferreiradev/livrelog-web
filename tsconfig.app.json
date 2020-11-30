@@ -3,7 +3,15 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": [],
+    "paths": {
+      "@shared/*": ["src/app/shared/*"],
+      "@enums/*": ["src/app/shared/enums/*"],
+      "@environments/*": ["src/environments/*"],
+      "@interceptors/*": ["src/app/shared/interceptors/*"],
+      "@models/*": ["src/app/shared/models/*"],
+      "@services/*": ["src/app/shared/services/*"],
+    }
   },
   "files": [
     "src/main.ts",

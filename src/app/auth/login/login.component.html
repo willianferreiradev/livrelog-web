@@ -1,0 +1,74 @@
+<div class="account-pages mt-5 pt-5" style="background-color: #12214a">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6 col-xl-5">
+        <div>
+          <div class="text-center authentication-logo mb-2">
+            <a [href]="siteUrl" class="logo-dark">
+              <span
+                ><img src="assets/images/logo-light.png" alt="" height="48"
+              /></span>
+            </a>
+            <a [href]="siteUrl" class="logo-light">
+              <span
+                ><img src="assets/images/logo-light.png" alt="" height="48"
+              /></span>
+            </a>
+          </div>
+
+          <form (submit)="onSubmit()" [formGroup]="form">
+            <div class="form-group mb-3">
+              <label><span style="color: #fff">Usuário</span> </label>
+              <input
+                class="form-control"
+                type="email"
+                placeholder="Seu email"
+                formControlName="email"
+              />
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="password"
+                ><span style="color: #fff">Senha</span></label
+              >
+              <input
+                class="form-control"
+                type="password"
+                formControlName="password"
+                placeholder="Sua senha"
+              />
+            </div>
+
+            <div class="form-group mb-3">
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  formControlName="remember_me"
+                />
+                <label class="custom-control-label" for="checkbox-signin"
+                  ><span style="color: #fff">Lembrar-me</span></label
+                >
+              </div>
+            </div>
+
+            <div class="form-group text-center mb-3">
+              <button
+                class="btn btn-primary btn-lg width-lg btn-rounded"
+                type="submit"
+              >
+                <i class="fe-log-in"></i> Login
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 text-center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<pre style="color: white">{{ form.value | json }}</pre>
