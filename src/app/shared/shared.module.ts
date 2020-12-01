@@ -4,6 +4,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './components/footer/footer.component';
 import { InformationBoxComponent } from './components/information-box/information-box.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -11,11 +12,12 @@ import { InformationBoxComponent } from './components/information-box/informatio
   declarations: [
     NavbarComponent,
     FooterComponent,
-    InformationBoxComponent
+    InformationBoxComponent,
   ],
   imports: [
     CommonModule,
-    NgbDropdownModule
+    NgbDropdownModule,
+    RouterModule
   ],
   exports: [
     NavbarComponent,

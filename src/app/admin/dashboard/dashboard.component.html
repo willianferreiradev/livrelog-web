@@ -1,7 +1,7 @@
 <div class="row">
   <div
     class="col-xl-3 col-md-6"
-    *ngFor="let item of getInformationBoxes(); let i = index"
+    *ngFor="let item of informationBoxes; let i = index"
   >
     <app-information-box [data]="item">
       <i class="mdi mdi-arrow-up text-white font-22" *ngIf="i == 3"></i>

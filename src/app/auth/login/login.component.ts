@@ -1,10 +1,13 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, Type } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { BaseForm } from '../../shared/helpers/BaseForm';
 
+import { BaseForm } from '@shared/helpers/BaseForm';
+import { TypeUser } from '@enums/TypeUser';
+import { AuthenticationService } from '@services/authentication.service';
+import { showToastError } from '@shared/helpers/toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,7 +20,8 @@ export class LoginComponent extends BaseForm implements OnInit, OnDestroy {
     @Inject(DOCUMENT) private document: Document,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    // private auth: Authe
+    private authentication: AuthenticationService,
+    private router: Router
   ) {
     super();
   }
@@ -26,7 +30,7 @@ export class LoginComponent extends BaseForm implements OnInit, OnDestroy {
     this.document.body.style.background = '#12214a';
     this.createForm();
     this.route.queryParams.subscribe(params =>
-      this.form.get('type_user').patchValue(params.type ?? 'client')
+      this.form.get('type_user').patchValue(params.type ?? TypeUser.CLIENT)
     );
   }
 
@@ -35,10 +39,10 @@ export class LoginComponent extends BaseForm implements OnInit, OnDestroy {
   }
 
   submit(): void {
-    // this.auth.login(this.formValue.email, this.formValue.password, 'client')
-    //   .then(success => console.log(success))
-    //   .catch(error => console.log(error));
-    // console.log('vamos lá');
+    this.authentication.login(this.formValue).subscribe(
+      () => this.router.navigate(['admin', 'dashboard']),
+      () => showToastError('Erro ao fazer login. Tente novamente', 'Erro!')
+    );
   }
 
   createForm(): void {
@@ -49,5 +53,19 @@ export class LoginComponent extends BaseForm implements OnInit, OnDestroy {
       remember_me: [true, Validators.required],
       type_user: [null, Validators.required]
     });
+  }
+
+  getLabelByTypeUser(typeUser): string {
+    if (typeUser === TypeUser.ADMIN || typeUser === TypeUser.CLIENT) {
+      return 'Digite seu email';
+    }
+
+    if (typeUser === TypeUser.TRANSPORTER) {
+      return 'Digite seu CNPJ';
+    }
+
+    if (typeUser === TypeUser.DRIVER) {
+      return 'Digite seu CPF';
+    }
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '@shared/services/authentication.service';
 import {
   IBarChartOptions,
   IChartistAnimationOptions,
@@ -7,6 +8,7 @@ import {
 import { ChartEvent, ChartType } from 'ng-chartist';
 
 import { TitlePageService } from '../../shared/services/title-page.service';
+import { DashboardService } from './dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -60,15 +62,26 @@ export class DashboardComponent implements OnInit {
     }
   };
 
+  dashboardData: any;
+  informationBoxes: any = [];
+
   constructor(
-    private titleService: TitlePageService
+    private titleService: TitlePageService,
+    private authService: AuthenticationService,
+    private dashboard: DashboardService
   ) { }
 
   ngOnInit(): void {
-    this.titleService.titleSubject.next(`Bem vindo ${this.user.name}`);
+    this.titleService.titleSubject.next(`Bem vindo ${this.authService.currentUserValue.name}`);
+
+    this.dashboard.dashboardData().subscribe(data => this.setInformationBoxes(data));
   }
 
-  getInformationBoxes(): any {
+  setInformationBoxes(data): any {
+    this.informationBoxes = this.getInformationBoxes(data);
+  }
+
+  getInformationBoxes(data): any {
     return [
       {
         title: 'Orçamentos Hoje',
@@ -90,7 +103,7 @@ export class DashboardComponent implements OnInit {
       },
       {
         title: 'Novos Usuários',
-        number: 0,
+        number: data.usersCreatedToday,
         subtitle: 'Cadastros de Hoje',
         colorClass: 'bg-pink',
         icon: {

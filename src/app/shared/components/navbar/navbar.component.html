@@ -12,7 +12,7 @@
           </a>
         </li>
 
-        <li class="d-none d-sm-block">
+        <!-- <li class="d-none d-sm-block">
           <form class="app-search">
             <div class="app-search-box">
               <div class="input-group">
@@ -25,7 +25,7 @@
               </div>
             </div>
           </form>
-        </li>
+        </li> -->
 
         <li class="dropdown notification-list" ngbDropdown>
           <a
@@ -168,40 +168,44 @@
     <div class="container-fluid">
       <div id="navigation">
         <ul class="navigation-menu">
-          <li class="has-submenu">
-            <a href="index.html"> <i class="fe-airplay"></i>Dashboard </a>
+          <li class="has-submenu" routerLinkActive="active">
+            <a routerLink="admin/dashboard">
+              <i class="fe-airplay"></i>Dashboard
+            </a>
           </li>
 
-          <li class="has-submenu">
-            <a href="#">
+          <li class="has-submenu" routerLinkActive="active">
+            <a>
               <i class="fe-bar-chart-2"></i>Consultas
               <div class="arrow-down"></div>
             </a>
             <ul class="submenu megamenu">
               <li>
                 <ul>
-                  <li><a href="consulta-usuario.html">Usuarios</a></li>
-                  <li><a href="consulta-orcamento.html">Orçamentos</a></li>
+                  <li><a routerLink="admin/queries/users">Usuarios</a></li>
+                  <li><a routerLink="admin/queries/budgets">Orçamentos</a></li>
                   <li>
-                    <a href="consulta-transportadora.html">Transportadoras</a>
+                    <a routerLink="admin/queries/transporters"
+                      >Transportadoras</a
+                    >
                   </li>
-                  <li><a href="consulta-mudanca.html">Mudanças</a></li>
-                  <li><a href="consulta-avarias.html">Avarias</a></li>
+                  <li><a routerLink="admin/queries/moves">Mudanças</a></li>
+                  <li><a routerLink="admin/queries/breakdowns">Avarias</a></li>
                 </ul>
               </li>
             </ul>
           </li>
-          <li class="has-submenu">
-            <a href="#">
+          <li class="has-submenu" routerLinkActive="active">
+            <a>
               <i class="fe-grid"></i>Ferramentas
               <div class="arrow-down"></div>
             </a>
             <ul class="submenu megamenu">
               <li>
                 <ul>
-                  <li><a href="cad-contrato.html">Contrato</a></li>
-                  <li><a href="cad-taxa.html">Taxas</a></li>
-                  <li><a href="cad-admin.html">Administrador</a></li>
+                  <li><a routerLink="admin/tools/contract">Contrato</a></li>
+                  <li><a routerLink="admin/tools/fees">Taxas</a></li>
+                  <li><a routerLink="admin/tools/admin">Administrador</a></li>
                 </ul>
               </li>
             </ul>

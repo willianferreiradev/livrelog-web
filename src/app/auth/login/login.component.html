@@ -18,7 +18,11 @@
 
           <form (submit)="onSubmit()" [formGroup]="form">
             <div class="form-group mb-3">
-              <label><span style="color: #fff">Usuário</span> </label>
+              <label
+                ><span style="color: #fff">{{
+                  getLabelByTypeUser(formValue.type_user)
+                }}</span>
+              </label>
               <input
                 class="form-control"
                 type="email"

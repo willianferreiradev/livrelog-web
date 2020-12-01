@@ -9,8 +9,8 @@ import { environment } from '@environments/environment';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private currentUserSubject: BehaviorSubject<unknown>;
-  public currentUser: Observable<unknown>;
+  private currentUserSubject: BehaviorSubject<any>;
+  public currentUser: Observable<any>;
 
   constructor(
     private http: HttpClient,
@@ -19,12 +19,12 @@ export class AuthenticationService {
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserValue(): unknown {
+  public get currentUserValue(): any {
     return this.currentUserSubject.value;
   }
 
-  login(username: string, password: string): Observable<unknown> {
-    return this.http.post<any>(`${environment?.api}auth/login`, { username, password })
+  login(loginData: any): Observable<unknown> {
+    return this.http.post<any>(`${environment.api}auth/login`, loginData)
       .pipe(
         map(user => {
           localStorage.setItem('currentUser', JSON.stringify(user));
@@ -38,4 +38,5 @@ export class AuthenticationService {
     localStorage.removeItem('clinic');
     this.currentUserSubject.next(null);
   }
+
 }
