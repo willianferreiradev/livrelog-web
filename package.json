@@ -25,6 +25,7 @@
     "bootstrap": "^4.5.0",
     "chartist": "^0.11.4",
     "ng-chartist": "^4.1.0",
+    "ngx-pagination": "^5.0.0",
     "ngx-spinner": "^10.0.1",
     "rxjs": "~6.5.5",
     "toastr": "^2.1.4",
