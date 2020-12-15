@@ -5,5 +5,8 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class TitlePageService {
-  titleSubject: BehaviorSubject<string> = new BehaviorSubject(null);
+  titleSubject: BehaviorSubject<any> = new BehaviorSubject({
+    title: 'Titulo',
+    breadcrumb: ['Home']
+  });
 }

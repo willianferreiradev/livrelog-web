@@ -6,7 +6,6 @@ const userColumns: DatatableColumn[] = [
   { title: 'Email', name: 'email' },
   { title: 'Celular', name: 'phone' },
   { title: 'Criado em', name: 'created_at' },
-  { title: '', name: 'id' }
 ];
 
 export default userColumns;

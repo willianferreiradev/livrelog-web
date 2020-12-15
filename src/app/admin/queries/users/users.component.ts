@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 
@@ -8,6 +8,8 @@ import { User } from '@models/User';
 import { DatatableData } from '@models/Datatable';
 import columns from './user.columns';
 import { Observable, Subscription } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TitlePageService } from '@shared/services/title-page.service';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -18,15 +20,19 @@ export class UsersComponent implements OnInit, OnDestroy {
   perPage: number;
   filter = '';
   subscription: Subscription;
+  @ViewChild('content') content;
 
   constructor(
     private usersService: UsersService,
     private datatableService: DatatableService<User>,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal,
+    private title: TitlePageService
   ) { }
 
   ngOnInit(): void {
+    this.title.titleSubject.next({ title: 'Relação de Usuários', breadcrumb: ['Home', 'Consultas', 'Usuários']});
     this.subscription = this.route.queryParams.pipe(switchMap(params => {
       const page = params.page ?? 1;
       this.perPage = params.perPage ?? 10;
@@ -68,4 +74,5 @@ export class UsersComponent implements OnInit, OnDestroy {
     user.photo = 'assets/images/users/avatar-1.jpg';
     return user;
   }
+
 }

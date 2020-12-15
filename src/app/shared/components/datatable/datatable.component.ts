@@ -4,6 +4,11 @@ import { debounceTime, distinctUntilChanged, filter, map, tap } from 'rxjs/opera
 
 import { Pagination } from '@models/Pagination';
 
+enum ColumnType {
+  PHOTO = 'photo',
+  CREATED_AT = 'created_at',
+  ACTION = 'action'
+}
 @Component({
   selector: 'app-datatable',
   templateUrl: './datatable.component.html',
@@ -19,9 +24,11 @@ export class DatatableComponent implements OnInit {
   @Output() changeLengthRegisters: EventEmitter<any> = new EventEmitter(null);
   @Output() changePage: EventEmitter<any> = new EventEmitter(null);
   @Output() search: EventEmitter<any> = new EventEmitter(null);
+  @Output() actionEvent: EventEmitter<any> = new EventEmitter(null);
 
   numbersRegister = 10;
   form: FormGroup;
+  ColumnType = ColumnType;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -55,5 +62,11 @@ export class DatatableComponent implements OnInit {
     if ((this.paginationData.last_page - this.paginationData.current_page) < 5) return pages.slice(last - 10, last);
 
     return pages.slice(current - 6, current + 5);
+  }
+
+  getParams(params: string[], data: unknown): any {
+    const newParams = {};
+    params.forEach(item => newParams[item] = data[item]);
+    return newParams;
   }
 }

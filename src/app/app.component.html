@@ -10,13 +10,23 @@
               <div class="page-title-box">
                 <div class="page-title-right">
                   <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item">
+                    <li
+                      *ngFor="
+                        let breadcrumb of title?.breadcrumb;
+                        let last = last
+                      "
+                      class="breadcrumb-item"
+                      [class.active]="last"
+                    >
+                      {{ breadcrumb }}
+                    </li>
+                    <!-- <li class="breadcrumb-item">
                       <a routerLink="/home">Home</a>
                     </li>
-                    <li class="breadcrumb-item active">Dashboard</li>
+                    <li class="breadcrumb-item active">Dashboard</li> -->
                   </ol>
                 </div>
-                <h4 class="page-title">{{ title || "Titulo" }}</h4>
+                <h4 class="page-title">{{ title?.title || "Titulo" }}</h4>
               </div>
             </div>
           </div>

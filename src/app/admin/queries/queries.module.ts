@@ -8,6 +8,7 @@ import { TransportersComponent } from './transporters/transporters.component';
 import { MovesComponent } from './moves/moves.component';
 import { BreakdownsComponent } from './breakdowns/breakdowns.component';
 import { SharedModule } from '@shared/shared.module';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -16,12 +17,14 @@ import { SharedModule } from '@shared/shared.module';
     BudgetsComponent,
     TransportersComponent,
     MovesComponent,
-    BreakdownsComponent
+    BreakdownsComponent,
+
   ],
   imports: [
     CommonModule,
     QueriesRoutingModule,
-    SharedModule
+    SharedModule,
+    NgbModalModule
   ]
 })
 export class QueriesModule { }

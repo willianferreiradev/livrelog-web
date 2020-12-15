@@ -38,125 +38,74 @@
         <thead>
           <tr class="bg-info text-white text-uppercase">
             <th *ngFor="let column of columns">
-              {{ column?.title }}
+              {{ column?.title != "action" ? column?.title : "" }}
             </th>
           </tr>
         </thead>
 
         <tbody>
           <tr *ngFor="let data of paginationData?.data">
-            <td *ngFor="let column of columns" nowrap>
-              <img
-                *ngIf="column.name == 'photo'; else text"
-                [src]="data[column.name]"
-                style="width: 60px"
-              />
-              <ng-template #text>
-                {{ data[column.name] }}
-              </ng-template>
+            <td *ngFor="let column of columns" nowrap [ngSwitch]="column.name">
+              <ng-container [ngSwitch]="column.name">
+                <img
+                  *ngSwitchCase="ColumnType.PHOTO"
+                  [src]="data[column.name]"
+                  style="width: 60px"
+                />
+                <span *ngSwitchCase="ColumnType.CREATED_AT">{{
+                  data[column.name] | date: "dd/MM/yyyy"
+                }}</span>
+
+                <span *ngSwitchCase="ColumnType.ACTION">
+                  <div class="btn-group" role="group" ngbDropdown>
+                    <button
+                      type="button"
+                      class="btn btn-primary dropdown-toggle"
+                      tabindex="0"
+                      role="button"
+                      ngbDropdownToggle
+                      id="dropdownAction"
+                    >
+                      <i class="mdi mdi-dots-vertical"></i>
+                    </button>
+                    <div
+                      class="dropdown-menu"
+                      aria-labelledby="dropdownAction"
+                      ngbDropdownMenu
+                    >
+                      <a
+                        ngbDropdownItem
+                        class="dropdown-item"
+                        *ngFor="let action of column.actions"
+                        style="cursor: pointer"
+                        (click)="
+                          actionEvent.emit({
+                            function: action.function,
+                            params: getParams(action.params, data)
+                          })
+                        "
+                      >
+                        <i [ngClass]="action.icon"></i> {{ action?.title }}
+                      </a>
+                      <!-- <a
+                        ngbDropdownItem
+                        class="dropdown-item"
+                        href="#"
+                        data-toggle="modal"
+                        data-target="#cad-admin"
+                        ><i class="mdi mdi-pen"></i> Editar</a
+                      > -->
+                      <!-- <a class="dropdown-item" href="#" ngbDropdownItem
+                        ><i class="mdi mdi-shield-lock-outline"></i> Bloquear</a
+                      > -->
+                    </div>
+                  </div>
+                </span>
+
+                <span *ngSwitchDefault> {{ data[column.name] }}</span>
+              </ng-container>
             </td>
           </tr>
-          <!-- <tr>
-      <td>
-        <img src="assets/images/users/avatar-10.jpg" width="60" />
-      </td>
-      <td nowrap>Fulano da Mata</td>
-      <td nowrap>tokio@mail.com</td>
-      <td nowrap>99 99999-9999</td>
-      <td nowrap>27/10/2020</td>
-      <td nowrap>
-        <div class="btn-group" role="group">
-          <button
-            id="btnGroupDrop1"
-            type="button"
-            class="btn btn-primary dropdown-toggle"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            <i class="mdi mdi-dots-vertical"></i>
-          </button>
-          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-            <a
-              class="dropdown-item"
-              href="#"
-              data-toggle="modal"
-              data-target="#cad-admin"
-              ><i class="mdi mdi-pen"></i> Editar</a
-            >
-            <a class="dropdown-item" href="#"
-              ><i class="mdi mdi-shield-lock-outline"></i> Bloquear</a
-            >
-          </div>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td><img src="assets/images/users/avatar-5.jpg" width="60" /></td>
-      <td nowrap>Ciclano da Montanha</td>
-      <td nowrap>rio@mail.com</td>
-      <td nowrap>99 99999-9999</td>
-      <td nowrap>27/10/2020</td>
-      <td nowrap>
-        <div class="btn-group" role="group">
-          <button
-            id="btnGroupDrop1"
-            type="button"
-            class="btn btn-primary dropdown-toggle"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            <i class="mdi mdi-dots-vertical"></i>
-          </button>
-          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-            <a
-              class="dropdown-item"
-              href="#"
-              data-toggle="modal"
-              data-target="#cad-admin"
-              ><i class="mdi mdi-pen"></i> Editar</a
-            >
-            <a class="dropdown-item" href="#"
-              ><i class="mdi mdi-shield-lock-outline"></i> Bloquear</a
-            >
-          </div>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td><img src="assets/images/users/avatar-1.jpg" width="60" /></td>
-      <td nowrap>Fulano da Mata</td>
-      <td nowrap>berlim@mail.com</td>
-      <td nowrap>99 99999-9999</td>
-      <td nowrap>27/10/2020</td>
-      <td nowrap>
-        <div class="btn-group" role="group">
-          <button
-            id="btnGroupDrop1"
-            type="button"
-            class="btn btn-primary dropdown-toggle"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            <i class="mdi mdi-dots-vertical"></i>
-          </button>
-          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-            <a
-              class="dropdown-item"
-              href="#"
-              data-toggle="modal"
-              data-target="#cad-admin"
-              ><i class="mdi mdi-pen"></i> Editar</a
-            >
-            <a class="dropdown-item" href="#"
-              ><i class="mdi mdi-shield-lock-outline"></i> Bloquear</a
-            >
-          </div>
-        </div>
-      </td>
-    </tr> -->
         </tbody>
       </table>
     </div>

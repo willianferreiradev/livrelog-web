@@ -72,7 +72,10 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.titleService.titleSubject.next(`Bem vindo ${this.authService.currentUserValue.name}`);
+    this.titleService.titleSubject.next({
+      title: `Bem vindo ${this.authService.currentUserValue.name}`,
+      breadcrumb: ['Home', 'Dashboard']
+    });
 
     this.dashboard.dashboardData().subscribe(data => this.setInformationBoxes(data));
   }
