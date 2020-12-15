@@ -7,8 +7,7 @@ import { DatatableService } from '@shared/components/datatable/datatable.service
 import { User } from '@models/User';
 import { DatatableData } from '@models/Datatable';
 import columns from './user.columns';
-import { Observable, Subscription } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 import { TitlePageService } from '@shared/services/title-page.service';
 @Component({
   selector: 'app-users',
@@ -20,14 +19,12 @@ export class UsersComponent implements OnInit, OnDestroy {
   perPage: number;
   filter = '';
   subscription: Subscription;
-  @ViewChild('content') content;
 
   constructor(
     private usersService: UsersService,
     private datatableService: DatatableService<User>,
     private route: ActivatedRoute,
     private router: Router,
-    private modalService: NgbModal,
     private title: TitlePageService
   ) { }
 
@@ -74,5 +71,4 @@ export class UsersComponent implements OnInit, OnDestroy {
     user.photo = 'assets/images/users/avatar-1.jpg';
     return user;
   }
-
 }

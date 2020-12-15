@@ -64,6 +64,12 @@ export class DatatableComponent implements OnInit {
     return pages.slice(current - 6, current + 5);
   }
 
+  getColumnValue(data, prop: string): string {
+    let dataWithProp = data;
+    prop.split('.').forEach(item => dataWithProp = dataWithProp[item]);
+    return dataWithProp;
+  }
+
   getParams(params: string[], data: unknown): any {
     const newParams = {};
     params.forEach(item => newParams[item] = data[item]);

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TitlePageService } from '@shared/services/title-page.service';
 
 @Component({
   selector: 'app-budgets',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BudgetsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private title: TitlePageService) { }
 
   ngOnInit(): void {
+    this.title.titleSubject.next({ title: 'Relação de Orçamentos', breadcrumb: ['Home', 'Consultas', 'Orçamentos'] });
   }
 
 }

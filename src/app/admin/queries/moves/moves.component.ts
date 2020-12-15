@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TitlePageService } from '@shared/services/title-page.service';
 
 @Component({
   selector: 'app-moves',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MovesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private title: TitlePageService) { }
 
   ngOnInit(): void {
+    this.title.titleSubject.next({ title: 'Relação de Mudanças', breadcrumb: ['Home', 'Consultas', 'Mudanças'] });
   }
 
 }
