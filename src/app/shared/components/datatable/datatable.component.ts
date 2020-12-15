@@ -7,7 +7,9 @@ import { Pagination } from '@models/Pagination';
 enum ColumnType {
   PHOTO = 'photo',
   CREATED_AT = 'created_at',
-  ACTION = 'action'
+  DATE = 'date',
+  ACTION = 'action',
+  STATUS = 'status'
 }
 @Component({
   selector: 'app-datatable',
@@ -55,7 +57,7 @@ export class DatatableComponent implements OnInit {
     const last = this.paginationData.last_page;
     const current = this.paginationData.current_page;
 
-    if (this.paginationData.last_page < 10) return pages;
+    if (this.paginationData.last_page <= 10) return pages;
 
     if (this.paginationData.last_page > 10 && this.paginationData.current_page <= 5) return pages.slice(0, 10);
 
@@ -65,6 +67,7 @@ export class DatatableComponent implements OnInit {
   }
 
   getColumnValue(data, prop: string): string {
+    if (!prop) return '';
     let dataWithProp = data;
     prop.split('.').forEach(item => dataWithProp = dataWithProp[item]);
     return dataWithProp;
@@ -74,5 +77,15 @@ export class DatatableComponent implements OnInit {
     const newParams = {};
     params.forEach(item => newParams[item] = data[item]);
     return newParams;
+  }
+
+  getBadge(value: string): string {
+    if (value === 'Sem respostas') {
+      return 'badge-danger';
+    } else if (value === 'Aguardando') {
+      return 'badge-warning';
+    } else {
+      return 'badge-success';
+    }
   }
 }

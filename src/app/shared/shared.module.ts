@@ -7,6 +7,8 @@ import { InformationBoxComponent } from './components/information-box/informatio
 import { RouterModule } from '@angular/router';
 import { DatatableComponent } from './components/datatable/datatable.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TextToModalComponent } from './components/text-to-modal/text-to-modal.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 
@@ -16,19 +18,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FooterComponent,
     InformationBoxComponent,
     DatatableComponent,
+    TextToModalComponent,
   ],
   imports: [
     CommonModule,
     NgbDropdownModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forChild()
   ],
   exports: [
     NavbarComponent,
     FooterComponent,
     InformationBoxComponent,
-    DatatableComponent
+    DatatableComponent,
+    TextToModalComponent
   ]
 })
 export class SharedModule { }

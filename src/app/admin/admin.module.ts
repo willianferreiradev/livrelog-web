@@ -6,14 +6,17 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChartistModule } from 'ng-chartist';
 
 import { SharedModule } from '@shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [
+    DashboardComponent
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     ChartistModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class AdminModule { }

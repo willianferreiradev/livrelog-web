@@ -9,6 +9,7 @@ import { MovesComponent } from './moves/moves.component';
 import { BreakdownsComponent } from './breakdowns/breakdowns.component';
 import { SharedModule } from '@shared/shared.module';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -18,13 +19,13 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
     TransportersComponent,
     MovesComponent,
     BreakdownsComponent,
-
   ],
   imports: [
     CommonModule,
     QueriesRoutingModule,
     SharedModule,
-    NgbModalModule
+    NgbModalModule,
+    NgxMaskModule.forChild()
   ]
 })
 export class QueriesModule { }

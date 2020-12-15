@@ -1,1 +1,22 @@
-<p>contracts works!</p>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="header-title">Edite o contrato</h4>
+        <angular-editor
+          [(ngModel)]="htmlContent"
+          [config]="config"
+        ></angular-editor>
+        <p class="text-right mt-3">
+          <button
+            class="btn btn-lg btn-primary align-items-end"
+            data-toggle="modal"
+            data-target="#cad-admin"
+          >
+            <i class="mdi mdi-content-save"></i> Salvar
+          </button>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

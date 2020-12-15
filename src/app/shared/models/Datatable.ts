@@ -5,6 +5,8 @@ export interface DatatableColumn {
   title?: string;
   width?: string;
   actions?: Action[];
+  badge?: any;
+  mask?: string;
 }
 
 export interface Action {

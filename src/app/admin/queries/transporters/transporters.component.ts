@@ -24,7 +24,7 @@ export class TransportersComponent implements OnInit, OnDestroy {
     private datatableService: DatatableService<Transporter>,
     private route: ActivatedRoute,
     private router: Router,
-    private title: TitlePageService
+    private title: TitlePageService,
   ) { }
 
   ngOnInit(): void {
@@ -34,7 +34,7 @@ export class TransportersComponent implements OnInit, OnDestroy {
       this.perPage = params.perPage ?? 10;
       this.filter = params.search ?? '';
 
-      if (this.search) {
+      if (this.filter) {
         return this.transporterService.search(page, this.perPage, this.filter);
       }
       return this.transporterService.all(page, this.perPage);

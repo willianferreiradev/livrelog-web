@@ -15,7 +15,7 @@ import { JwtInterceptor } from '@interceptors/jwt.interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FormsModule } from '@angular/forms';
-
+import { NgxMaskModule } from 'ngx-mask';
 registerLocaleData(localePt);
 @NgModule({
   declarations: [
@@ -30,7 +30,8 @@ registerLocaleData(localePt);
     HttpClientModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [
     {

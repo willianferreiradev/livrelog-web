@@ -88,7 +88,7 @@ export class DashboardComponent implements OnInit {
     return [
       {
         title: 'Orçamentos Hoje',
-        number: 0,
+        number: data.budgetsCreatedToday,
         subtitle: 'Solicitados por Usuários',
         colorClass: 'bg-purple',
         icon: {
@@ -97,7 +97,7 @@ export class DashboardComponent implements OnInit {
       },
       {
         title: 'Mudanças Hoje',
-        number: 0,
+        number: data.changesToday,
         subtitle: 'Agendadas',
         colorClass: 'bg-info',
         icon: {
@@ -115,7 +115,7 @@ export class DashboardComponent implements OnInit {
       },
       {
         title: 'Orçamentos Gerados',
-        number: 0,
+        number: data.budgetsGenerateds,
         subtitle: 'Hoje por Transportadoras',
         colorClass: 'bg-success',
         icon: {

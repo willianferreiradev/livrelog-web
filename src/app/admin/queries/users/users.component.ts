@@ -35,7 +35,7 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.perPage = params.perPage ?? 10;
       this.filter = params.search ?? '';
 
-      if (this.search) {
+      if (this.filter) {
         return this.usersService.search(page, this.perPage, this.filter);
       }
       return this.usersService.all(page, this.perPage);
