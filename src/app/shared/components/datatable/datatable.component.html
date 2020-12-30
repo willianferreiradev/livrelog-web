@@ -31,96 +31,105 @@
 
   <div class="row">
     <div class="col-12">
-      <table
-        class="table table-striped table-hover dt-responsive nowrap"
-        style="border-collapse: collapse; border-spacing: 0; width: 100%"
-      >
-        <thead>
-          <tr class="bg-info text-white text-uppercase">
-            <th *ngFor="let column of columns">
-              {{ column?.title != "action" ? column?.title : "" }}
-            </th>
-          </tr>
-        </thead>
+      <div class="table-responsive">
+        <table
+          class="table table-striped table-hover"
+          style="
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100% !important;
+          "
+        >
+          <thead>
+            <tr class="bg-info text-white text-uppercase">
+              <th *ngFor="let column of columns">
+                {{ column?.title != "action" ? column?.title : "" }}
+              </th>
+            </tr>
+          </thead>
 
-        <tbody>
-          <tr *ngFor="let data of paginationData?.data">
-            <td
-              *ngFor="let column of columns"
-              nowrap
-              [ngSwitch]="column.name"
-              [ngStyle]="{ width: column.width }"
-            >
-              <ng-container [ngSwitch]="column.name">
-                <img
-                  *ngSwitchCase="ColumnType.PHOTO"
-                  [src]="data[column.name]"
-                  style="width: 60px"
-                />
-                <span *ngSwitchCase="ColumnType.CREATED_AT">{{
-                  data[column.name] | date: "dd/MM/yyyy"
-                }}</span>
+          <tbody>
+            <tr *ngFor="let data of paginationData?.data">
+              <td
+                *ngFor="let column of columns"
+                nowrap
+                [ngSwitch]="column.name"
+                [ngStyle]="{ width: column.width }"
+              >
+                <ng-container [ngSwitch]="column.name">
+                  <img
+                    *ngSwitchCase="ColumnType.PHOTO"
+                    [src]="data[column.name]"
+                    style="width: 60px"
+                  />
+                  <span *ngSwitchCase="ColumnType.CREATED_AT">{{
+                    data[column.name] | date: "dd/MM/yyyy"
+                  }}</span>
 
-                <span *ngSwitchCase="ColumnType.DATE">{{
-                  data[column.name] | date: "dd/MM/yyyy"
-                }}</span>
+                  <span *ngSwitchCase="ColumnType.DATE">{{
+                    data[column.name] | date: "dd/MM/yyyy"
+                  }}</span>
 
-                <span
-                  *ngSwitchCase="ColumnType.STATUS"
-                  class="badge"
-                  [ngClass]="getBadge(data[column.name])"
-                  >{{ data[column.name] }}</span
-                >
+                  <span *ngSwitchCase="'budget.date'">{{
+                    getColumnValue(data, column.name) | date: "dd/MM/yyyy"
+                  }}</span>
 
-                <span *ngSwitchCase="ColumnType.ACTION">
-                  <div
-                    class="btn-group"
-                    *ngIf="column.actions.length == 1; else array"
+                  <span
+                    *ngSwitchCase="ColumnType.STATUS"
+                    class="badge"
+                    [ngClass]="getBadge(data[column.name])"
+                    >{{ data[column.name] }}</span
                   >
-                    <button
-                      class="btn btn-primary"
-                      (click)="
-                        actionEvent.emit({
-                          function: column.actions[0].function,
-                          params: getParams(column.actions[0].params, data)
-                        })
-                      "
+
+                  <span *ngSwitchCase="ColumnType.ACTION">
+                    <div
+                      class="btn-group"
+                      *ngIf="column.actions.length == 1; else array"
                     >
-                      <i class="mdi" [ngClass]="column.actions[0].icon"></i>
-                    </button>
-                  </div>
-                  <ng-template #array>
-                    <div class="btn-group" role="group" ngbDropdown>
                       <button
-                        type="button"
-                        class="btn btn-primary dropdown-toggle"
-                        tabindex="0"
-                        role="button"
-                        ngbDropdownToggle
-                        id="dropdownAction"
+                        class="btn btn-primary"
+                        (click)="
+                          actionEvent.emit({
+                            function: column.actions[0].function,
+                            params: getParams(column.actions[0].params, data)
+                          })
+                        "
                       >
-                        <i class="mdi mdi-dots-vertical"></i>
+                        <i class="mdi" [ngClass]="column.actions[0].icon"></i>
                       </button>
-                      <div
-                        class="dropdown-menu"
-                        aria-labelledby="dropdownAction"
-                        ngbDropdownMenu
-                      >
-                        <a
-                          ngbDropdownItem
-                          class="dropdown-item"
-                          *ngFor="let action of column.actions"
-                          style="cursor: pointer"
-                          (click)="
-                            actionEvent.emit({
-                              function: action.function,
-                              params: getParams(action.params, data)
-                            })
-                          "
+                    </div>
+                    <ng-template #array>
+                      <div class="btn-group" role="group" ngbDropdown>
+                        <button
+                          type="button"
+                          class="btn btn-primary dropdown-toggle"
+                          tabindex="0"
+                          role="button"
+                          ngbDropdownToggle
+                          id="dropdownAction"
                         >
-                          <i [ngClass]="action.icon"></i> {{ action?.title }}
-                        </a>
-                        <!-- <a
+                          <i class="mdi mdi-dots-vertical"></i>
+                        </button>
+                        <div
+                          class="dropdown-menu"
+                          aria-labelledby="dropdownAction"
+                          ngbDropdownMenu
+                        >
+                          <a
+                            ngbDropdownItem
+                            class="dropdown-item"
+                            *ngFor="let action of column.actions"
+                            style="cursor: pointer"
+                            (click)="
+                              actionEvent.emit({
+                                function: action.function,
+                                params: getParams(action.params, data)
+                              })
+                            "
+                          >
+                            <i [ngClass]="action.icon"></i> {{ action?.title }}
+                          </a>
+                          <!-- <a
                         ngbDropdownItem
                         class="dropdown-item"
                         href="#"
@@ -128,27 +137,30 @@
                         data-target="#cad-admin"
                         ><i class="mdi mdi-pen"></i> Editar</a
                       > -->
-                        <!-- <a class="dropdown-item" href="#" ngbDropdownItem
+                          <!-- <a class="dropdown-item" href="#" ngbDropdownItem
                         ><i class="mdi mdi-shield-lock-outline"></i> Bloquear</a
                       > -->
+                        </div>
                       </div>
-                    </div>
-                  </ng-template>
-                </span>
-
-                <span *ngSwitchDefault>
-                  <span *ngIf="column.mask; else noMask">
-                    {{ getColumnValue(data, column.name) | mask: column.mask }}
+                    </ng-template>
                   </span>
-                  <ng-template #noMask>
-                    {{ getColumnValue(data, column.name) }}
-                  </ng-template>
-                </span>
-              </ng-container>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+
+                  <span *ngSwitchDefault>
+                    <span *ngIf="column.mask; else noMask">
+                      {{
+                        getColumnValue(data, column.name) | mask: column.mask
+                      }}
+                    </span>
+                    <ng-template #noMask>
+                      {{ getColumnValue(data, column.name) }}
+                    </ng-template>
+                  </span>
+                </ng-container>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
   <div class="row">

@@ -29,6 +29,6 @@ export class AppComponent implements OnInit {
   }
 
   isAuthRoute(): boolean {
-    return location.href.includes('auth/login');
+    return location.href.includes('auth/login') || location.href.includes('auth/logout');
   }
 }

@@ -6,7 +6,10 @@ import { ContractsComponent } from './contracts/contracts.component';
 import { FeesComponent } from './fees/fees.component';
 import { AdminComponent } from './admin/admin.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { SharedModule } from '@shared/shared.module';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -19,7 +22,11 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     ToolsRoutingModule,
     AngularEditorModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModalModule,
+    SharedModule,
+    NgxMaskModule
   ]
 })
 export class ToolsModule { }

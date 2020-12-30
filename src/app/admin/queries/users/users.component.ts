@@ -6,7 +6,7 @@ import { UsersService } from './users.service';
 import { DatatableService } from '@shared/components/datatable/datatable.service';
 import { User } from '@models/User';
 import { DatatableData } from '@models/Datatable';
-import columns from './user.columns';
+import columns from './users.columns';
 import { Subscription } from 'rxjs';
 import { TitlePageService } from '@shared/services/title-page.service';
 @Component({

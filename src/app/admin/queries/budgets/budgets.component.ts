@@ -69,6 +69,12 @@ export class BudgetsComponent implements OnInit {
 
   openModal(content: any, budget: Budget): void {
     this.selectedBudget = budget;
+
+    this.selectedBudget.withdrawal = budget.characteristics.find(c => c.type === 'withdrawal');
+    this.selectedBudget.delivery = budget.characteristics.find(c => c.type === 'delivery');
+
+    console.log(this.selectedBudget);
+
     this.modalService.open(content, { size: 'full' }).result.then(() => this.selectedBudget = null);
   }
 }

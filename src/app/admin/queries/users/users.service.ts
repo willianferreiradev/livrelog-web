@@ -14,11 +14,15 @@ export class UsersService {
 
   constructor(private http: HttpClient) { }
 
-  all(page: number, perPage: number): Observable<Pagination<User>> {
-    return this.http.get<Pagination<User>>(`${this.API}?type=client&page=${page}&perPage=${perPage}`);
+  all(page: number, perPage: number, type = 'client'): Observable<Pagination<User>> {
+    return this.http.get<Pagination<User>>(`${this.API}?type=${type}&page=${page}&perPage=${perPage}`);
   }
 
-  search(page: number, perPage: number, search: string): Observable<Pagination<User>> {
-    return this.http.get<Pagination<User>>(`${this.API}?type=client&page=${page}&perPage=${perPage}&search=${search}`);
+  search(page: number, perPage: number, search: string, type = 'client'): Observable<Pagination<User>> {
+    return this.http.get<Pagination<User>>(`${this.API}?type=${type}&page=${page}&perPage=${perPage}&search=${search}`);
+  }
+
+  createAdmin(user: User): Observable<any> {
+    return this.http.post(this.API, { type: 'admin', ...user });
   }
 }

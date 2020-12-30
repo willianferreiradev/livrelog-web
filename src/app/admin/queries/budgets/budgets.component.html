@@ -62,248 +62,158 @@
           ></app-text-to-modal>
         </div>
         <div class="col-md-2">
-          <div class="form-group">
-            <label for="" class="control-label">Respondido por:</label>
+          <div
+            class="form-group"
+            *ngIf="selectedBudget?.proposals.length > 0; else noProposals"
+          >
+            <label for="" class="control-label">Respondido por</label>
             <select class="form-control">
-              <option>Transportadora 01</option>
-              <option>Transportadora 02</option>
-              <option>Transportadora 03</option>
+              <option *ngFor="let proposal of selectedBudget?.proposals">
+                {{ proposal?.transporter?.user?.name }} -
+                {{ proposal?.transporter?.name }}
+              </option>
             </select>
           </div>
+          <ng-template #noProposals>
+            <app-text-to-modal
+              title="Respondido por"
+              text="Sem repostas para esse orçamento"
+            ></app-text-to-modal>
+          </ng-template>
         </div>
       </div>
-      <div class="row mt-3">
+      <div class="row mt-3" *ngIf="selectedBudget?.withdrawal">
         <div class="col-lg-12">
           <h5>Caracterisiticas da Mudança - RETIRADA</h5>
         </div>
 
         <div class="col-md-3">
-          <div class="form-group">
-            <label for="" class="control-label">Tipo de Local</label>
-            <input
-              type="text"
-              class="form-control-plaintext"
-              value="Sobrado"
-              readonly
-            />
-          </div>
+          <app-text-to-modal
+            title="Tipo de Local"
+            [text]="selectedBudget?.withdrawal?.type_building"
+          ></app-text-to-modal>
         </div>
         <div class="col-md-3">
-          <div class="form-group">
-            <label for="" class="control-label">Dormitórios</label>
-            <input
-              type="text"
-              class="form-control-plaintext"
-              value="03"
-              readonly
-            />
-          </div>
+          <app-text-to-modal
+            title="Dormitórios"
+            [text]="selectedBudget?.withdrawal?.number_bedroom"
+          ></app-text-to-modal>
         </div>
         <div class="col-md-3">
-          <div class="form-group">
-            <label for="" class="control-label">Elevador</label>
-            <input
-              type="text"
-              class="form-control-plaintext"
-              value="NÃO"
-              readonly
-            />
-          </div>
+          <app-text-to-modal
+            title="Elevador"
+            [text]="selectedBudget?.withdrawal?.has_elevator ? 'Sim' : 'Não'"
+          ></app-text-to-modal>
         </div>
         <div class="col-md-3">
-          <div class="form-group">
-            <label for="" class="control-label">Escadas</label>
-            <input
-              type="text"
-              class="form-control-plaintext"
-              value="SIM"
-              readonly
-            />
-          </div>
+          <app-text-to-modal
+            title="Escadas"
+            [text]="selectedBudget?.withdrawal?.has_stairs ? 'Sim' : 'Não'"
+          ></app-text-to-modal>
         </div>
         <div class="col-md-3">
-          <div class="form-group">
-            <label for="" class="control-label">Estacionamento</label>
-            <input
-              type="text"
-              class="form-control-plaintext"
-              value="NÃO"
-              readonly
-            />
-          </div>
+          <app-text-to-modal
+            title="Estacionamento"
+            [text]="'Não'"
+          ></app-text-to-modal>
         </div>
         <div class="col-md-3">
-          <div class="form-group">
-            <label for="" class="control-label">Estacionamento Próximo</label>
-            <input
-              type="text"
-              class="form-control-plaintext"
-              value="NÃO"
-              readonly
-            />
-          </div>
+          <app-text-to-modal
+            title="Estacionamento"
+            [text]="'Não'"
+          ></app-text-to-modal>
         </div>
         <div class="col-md-3">
-          <div class="form-group">
-            <label for="" class="control-label">Desmontar </label>
-            <input
-              type="text"
-              class="form-control-plaintext"
-              value="SIM"
-              readonly
-            />
-          </div>
+          <app-text-to-modal
+            title="Desmontar"
+            [text]="
+              selectedBudget?.withdrawal?.disassemble_furniture ? 'Sim' : 'Não'
+            "
+          ></app-text-to-modal>
         </div>
         <div class="col-md-3">
-          <div class="form-group">
-            <label for="" class="control-label">EMBALAR</label>
-            <input
-              type="text"
-              class="form-control-plaintext"
-              value="NÃO"
-              readonly
-            />
-          </div>
+          <app-text-to-modal
+            title="Desmontar"
+            [text]="selectedBudget?.withdrawal?.pack_furniture ? 'Sim' : 'Não'"
+          ></app-text-to-modal>
         </div>
       </div>
-      <div class="row mt-3">
+      <div class="row mt-3" *ngIf="selectedBudget?.delivery">
         <div class="col-lg-12">
           <h5>Caracterisiticas da Mudança - ENTREGA</h5>
         </div>
 
         <div class="col-md-3">
-          <div class="form-group">
-            <label for="" class="control-label">Tipo de Local</label>
-            <input
-              type="text"
-              class="form-control-plaintext"
-              value="Sobrado"
-              readonly
-            />
-          </div>
+          <app-text-to-modal
+            title="Tipo de Local"
+            [text]="selectedBudget?.delivery?.type_building"
+          ></app-text-to-modal>
         </div>
         <div class="col-md-3">
-          <div class="form-group">
-            <label for="" class="control-label">Dormitórios</label>
-            <input
-              type="text"
-              class="form-control-plaintext"
-              value="03"
-              readonly
-            />
-          </div>
+          <app-text-to-modal
+            title="Dormitórios"
+            [text]="selectedBudget?.delivery?.number_bedroom"
+          ></app-text-to-modal>
         </div>
         <div class="col-md-3">
-          <div class="form-group">
-            <label for="" class="control-label">Elevador</label>
-            <input
-              type="text"
-              class="form-control-plaintext"
-              value="NÃO"
-              readonly
-            />
-          </div>
+          <app-text-to-modal
+            title="Elevador"
+            [text]="selectedBudget?.delivery?.has_elevator ? 'Sim' : 'Não'"
+          ></app-text-to-modal>
         </div>
         <div class="col-md-3">
-          <div class="form-group">
-            <label for="" class="control-label">Escadas</label>
-            <input
-              type="text"
-              class="form-control-plaintext"
-              value="SIM"
-              readonly
-            />
-          </div>
+          <app-text-to-modal
+            title="Escadas"
+            [text]="selectedBudget?.delivery?.has_stairs ? 'Sim' : 'Não'"
+          ></app-text-to-modal>
         </div>
         <div class="col-md-3">
-          <div class="form-group">
-            <label for="" class="control-label">Estacionamento</label>
-            <input
-              type="text"
-              class="form-control-plaintext"
-              value="NÃO"
-              readonly
-            />
-          </div>
+          <app-text-to-modal
+            title="Estacionamento"
+            [text]="'Não'"
+          ></app-text-to-modal>
         </div>
         <div class="col-md-3">
-          <div class="form-group">
-            <label for="" class="control-label">Estacionamento Próximo</label>
-            <input
-              type="text"
-              class="form-control-plaintext"
-              value="NÃO"
-              readonly
-            />
-          </div>
+          <app-text-to-modal
+            title="Estacionamento"
+            [text]="'Não'"
+          ></app-text-to-modal>
         </div>
         <div class="col-md-3">
-          <div class="form-group">
-            <label for="" class="control-label">MONTAR </label>
-            <input
-              type="text"
-              class="form-control-plaintext"
-              value="NÃO"
-              readonly
-            />
-          </div>
+          <app-text-to-modal
+            title="Desmontar"
+            [text]="
+              selectedBudget?.delivery?.disassemble_furniture ? 'Sim' : 'Não'
+            "
+          ></app-text-to-modal>
         </div>
         <div class="col-md-3">
-          <div class="form-group">
-            <label for="" class="control-label">DESEMBALAR</label>
-            <input
-              type="text"
-              class="form-control-plaintext"
-              value="NÃO"
-              readonly
-            />
-          </div>
+          <app-text-to-modal
+            title="Desmontar"
+            [text]="selectedBudget?.delivery?.pack_furniture ? 'Sim' : 'Não'"
+          ></app-text-to-modal>
         </div>
       </div>
       <div class="row mt-3">
         <div class="col-lg-12">
           <h5>OBSERVAÇÕES DO CLIENTE</h5>
           <div class="alert alert-info fade show" role="alert">
-            <strong>Aqui!</strong> vai a mensagem de observações do cliente!
+            {{ selectedBudget?.comments }}
           </div>
         </div>
       </div>
       <div class="row mt-3">
         <div class="col-lg-12">
-          <h5>Relação de Itens a Transportar</h5>
-          <p>Aqui vai a relação</p>
+          <h5>Lista de itens a tranportar</h5>
+          <p>{{ selectedBudget?.inventory }}</p>
         </div>
       </div>
       <div class="row mt-3">
         <div class="col-md-12">
-          <h5>Imagens da Mudança</h5>
+          <h5 *ngIf="selectedBudget?.photos">Imagens da Mudança</h5>
           <img
-            src="assets/images/small/img-1.jpg"
-            class="img-fluid img-thumbnail m-2"
-            width="190"
-          />
-          <img
-            src="assets/images/small/img-2.jpg"
-            class="img-fluid img-thumbnail m-2"
-            width="190"
-          />
-          <img
-            src="assets/images/small/img-3.jpg"
-            class="img-fluid img-thumbnail m-2"
-            width="190"
-          />
-          <img
-            src="assets/images/small/img-4.jpg"
-            class="img-fluid img-thumbnail m-2"
-            width="190"
-          />
-          <img
-            src="assets/images/small/img-5.jpg"
-            class="img-fluid img-thumbnail m-2"
-            width="190"
-          />
-          <img
-            src="assets/images/small/img-6.jpg"
+            *ngFor="let photo of selectedBudget?.photos"
+            [src]="photo"
             class="img-fluid img-thumbnail m-2"
             width="190"
           />

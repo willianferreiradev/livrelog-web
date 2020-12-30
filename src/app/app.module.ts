@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TesteComponent } from './teste/teste.component';
 import { SharedModule } from '@shared/shared.module';
 import { JwtInterceptor } from '@interceptors/jwt.interceptor';
 
@@ -20,7 +19,6 @@ registerLocaleData(localePt);
 @NgModule({
   declarations: [
     AppComponent,
-    TesteComponent
   ],
   imports: [
     AppRoutingModule,

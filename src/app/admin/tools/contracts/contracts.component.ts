@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { TitlePageService } from '@shared/services/title-page.service';
+import { ContractService } from './contract.service';
 
 @Component({
   selector: 'app-contracts',
@@ -37,9 +39,24 @@ export class ContractsComponent implements OnInit {
       },
     ]
   };
-  constructor() { }
+
+  constructor(
+    private contract: ContractService,
+    private titleService: TitlePageService
+    ) { }
 
   ngOnInit(): void {
+    this.titleService.titleSubject.next({
+      title: `Cadastro / Edição de Contrato`,
+      breadcrumb: ['Home', 'Ferramentas', 'Contrato']
+    });
+
+    this.contract.find().subscribe(e => this.htmlContent = e.contract);
+  }
+
+
+  register(): void {
+    this.contract.register(this.htmlContent).subscribe(e => console.log(e));
   }
 
 }

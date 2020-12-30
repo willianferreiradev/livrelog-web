@@ -1,5 +1,6 @@
 import { Address } from './Address';
 import { User } from './User';
+import { Characteristic } from './Characteristic';
 
 export interface Budget {
   id: number;
@@ -10,6 +11,10 @@ export interface Budget {
   origin_id?: number;
   destination_id?: number;
   client?: User;
-  origin?: Address
-  destination?: Address
+  origin?: Address;
+  destination?: Address;
+  characteristics?: Characteristic[];
+  withdrawal?: Characteristic;
+  delivery?: Characteristic;
+  photos: string[];
 }

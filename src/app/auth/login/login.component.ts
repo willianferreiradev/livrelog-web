@@ -15,13 +15,14 @@ import { showToastError } from '@shared/helpers/toastr';
 })
 export class LoginComponent extends BaseForm implements OnInit, OnDestroy {
   siteUrl: string = environment.site;
+  labelByTypeUser: string;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private authentication: AuthenticationService,
-    private router: Router
+    private router: Router,
   ) {
     super();
   }
@@ -29,9 +30,13 @@ export class LoginComponent extends BaseForm implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.document.body.style.background = '#12214a';
     this.createForm();
-    this.route.queryParams.subscribe(params =>
-      this.form.get('type_user').patchValue(params.type ?? TypeUser.CLIENT)
-    );
+    this.route.queryParams.subscribe(params => {
+      if (!params.type) {
+        return this.router.navigate([], { relativeTo: this.route, queryParams: { type: TypeUser.CLIENT } });
+      }
+      this.form.get('type_user').patchValue(params.type);
+      this.labelByTypeUser = this.getLabelByTypeUser(params.type);
+    });
   }
 
   ngOnDestroy(): void {
@@ -39,6 +44,7 @@ export class LoginComponent extends BaseForm implements OnInit, OnDestroy {
   }
 
   submit(): void {
+    this.form.get('cpf_cnpj').patchValue(this.formValue.email);
     this.authentication.login(this.formValue).subscribe(
       () => this.router.navigate(['admin', 'dashboard']),
       () => showToastError('Erro ao fazer login. Tente novamente', 'Erro!')

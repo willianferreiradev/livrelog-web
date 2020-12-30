@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <ul class="list-unstyled topnav-menu float-right mb-0">
         <li class="dropdown notification-list">
-          <a class="navbar-toggle nav-link">
+          <a class="navbar-toggle nav-link" (click)="openMenu()" id="lines">
             <div class="lines">
               <span></span>
               <span></span>
@@ -11,21 +11,6 @@
             </div>
           </a>
         </li>
-
-        <!-- <li class="d-none d-sm-block">
-          <form class="app-search">
-            <div class="app-search-box">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Buscar" />
-                <div class="input-group-append">
-                  <button class="btn" type="submit">
-                    <i class="fe-search"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </form>
-        </li> -->
 
         <li class="dropdown notification-list" ngbDropdown>
           <a
@@ -131,7 +116,8 @@
             <div class="dropdown-divider"></div>
 
             <a
-              href="logout.html"
+              style="cursor: pointer"
+              (click)="logout()"
               class="dropdown-item notify-item"
               ngbDropdownItem
             >
@@ -166,8 +152,8 @@
 
   <div class="topbar-menu">
     <div class="container-fluid">
-      <div id="navigation">
-        <ul class="navigation-menu">
+      <div id="navigation" [ngSwitch]="user?.type">
+        <ul class="navigation-menu" *ngSwitchCase="TypeUser.ADMIN">
           <li class="has-submenu" routerLinkActive="active">
             <a routerLink="admin/dashboard">
               <i class="fe-airplay"></i>Dashboard
@@ -190,7 +176,7 @@
                     >
                   </li>
                   <li><a routerLink="admin/queries/moves">Mudanças</a></li>
-                  <li><a routerLink="admin/queries/breakdowns">Avarias</a></li>
+                  <!-- <li><a routerLink="admin/queries/breakdowns">Avarias</a></li> -->
                 </ul>
               </li>
             </ul>
@@ -209,6 +195,84 @@
                 </ul>
               </li>
             </ul>
+          </li>
+        </ul>
+
+        <ul class="navigation-menu" *ngSwitchCase="TypeUser.TRANSPORTER">
+          <li class="has-submenu">
+            <a href="index.html"> <i class="fe-airplay"></i>Dashboard </a>
+          </li>
+
+          <li class="has-submenu">
+            <a href="truck-con-orcamento.html">
+              <i class="fe-file-text"></i>Orçamentos
+            </a>
+          </li>
+
+          <li class="has-submenu">
+            <a href="truck-con-mudanca.html">
+              <i class="fe-navigation"></i>Mudanças
+            </a>
+          </li>
+
+          <li class="has-submenu">
+            <a href="truck-con-avaria.html">
+              <i class="fe-zap-off"></i>Avarias
+            </a>
+          </li>
+
+          <li class="has-submenu">
+            <a href="truck-cad-veiculos.html">
+              <i class="fe-truck"></i>Veículos
+            </a>
+          </li>
+
+          <li class="has-submenu">
+            <a href="truck-cad-motorista.html">
+              <i class="fe-users"></i>Motoristas
+            </a>
+          </li>
+        </ul>
+
+        <ul class="navigation-menu" *ngSwitchCase="TypeUser.CLIENT">
+          <li class="has-submenu" routerLinkActive="active">
+            <a routerLink="clients/dashboard">
+              <i class="fe-airplay"></i>Dashboard
+            </a>
+          </li>
+
+          <li class="has-submenu">
+            <a routerLink="clients/request-budget">
+              <i class="fe-plus-circle"></i>Solicitar Orçamento
+            </a>
+          </li>
+
+          <li class="has-submenu">
+            <a href="user-meus-orcamentos.html">
+              <i class="fe-file-text"></i>Meus Orçamentos
+            </a>
+          </li>
+
+          <li class="has-submenu">
+            <a href="user-minhas-mudancas.html">
+              <i class="fe-truck"></i>Minhas Mudanças
+            </a>
+          </li>
+
+          <li class="has-submenu">
+            <a href="user-reportar-avaria.html">
+              <i class="fe-zap-off"></i>Reportar Avaria
+            </a>
+          </li>
+
+          <li class="has-submenu">
+            <a href="user-meus-dados.html">
+              <i class="fe-user-check"></i>Meus Dados
+            </a>
+          </li>
+
+          <li class="has-submenu">
+            <a href="#"> <i class="fe-log-out"></i>Sair </a>
           </li>
         </ul>
 

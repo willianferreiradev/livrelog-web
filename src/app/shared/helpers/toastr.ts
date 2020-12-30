@@ -1,4 +1,4 @@
-import * as toast from 'toastr';
+import * as toastr from 'toastr';
 
 /**
  * @param message - Message to be displayed
