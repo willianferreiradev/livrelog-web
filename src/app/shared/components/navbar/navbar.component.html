@@ -104,14 +104,14 @@
               <h6 class="text-overflow m-0">Seja bem vindo!</h6>
             </div>
 
-            <a
+            <!-- <a
               href="cont-admin.html"
               class="dropdown-item notify-item"
               ngbDropdownItem
             >
               <i class="fe-user"></i>
               <span>Meus Dados</span>
-            </a>
+            </a> -->
 
             <div class="dropdown-divider"></div>
 
@@ -199,36 +199,38 @@
         </ul>
 
         <ul class="navigation-menu" *ngSwitchCase="TypeUser.TRANSPORTER">
-          <li class="has-submenu">
-            <a href="index.html"> <i class="fe-airplay"></i>Dashboard </a>
+          <li class="has-submenu" routerLinkActive="active">
+            <a routerLink="transporters/dasboard">
+              <i class="fe-airplay"></i>Dashboard
+            </a>
           </li>
 
-          <li class="has-submenu">
-            <a href="truck-con-orcamento.html">
+          <li class="has-submenu" routerLinkActive="active">
+            <a routerLink="transporters/budgets">
               <i class="fe-file-text"></i>Orçamentos
             </a>
           </li>
 
-          <li class="has-submenu">
-            <a href="truck-con-mudanca.html">
+          <li class="has-submenu" routerLinkActive="active">
+            <a routerLink="transporters/moves">
               <i class="fe-navigation"></i>Mudanças
             </a>
           </li>
 
-          <li class="has-submenu">
-            <a href="truck-con-avaria.html">
+          <li class="has-submenu" routerLinkActive="active">
+            <a routerLink="transporters/breakdowns">
               <i class="fe-zap-off"></i>Avarias
             </a>
           </li>
 
-          <li class="has-submenu">
-            <a href="truck-cad-veiculos.html">
+          <li class="has-submenu" routerLinkActive="active">
+            <a routerLink="transporters/vehicles">
               <i class="fe-truck"></i>Veículos
             </a>
           </li>
 
-          <li class="has-submenu">
-            <a href="truck-cad-motorista.html">
+          <li class="has-submenu" routerLinkActive="active">
+            <a routerLink="transporters/drivers">
               <i class="fe-users"></i>Motoristas
             </a>
           </li>
@@ -241,39 +243,29 @@
             </a>
           </li>
 
-          <li class="has-submenu">
+          <li class="has-submenu" routerLinkActive="active">
             <a routerLink="clients/request-budget">
               <i class="fe-plus-circle"></i>Solicitar Orçamento
             </a>
           </li>
 
-          <li class="has-submenu">
-            <a href="user-meus-orcamentos.html">
+          <li class="has-submenu" routerLinkActive="active">
+            <a routerLink="clients/my-budgets">
               <i class="fe-file-text"></i>Meus Orçamentos
             </a>
           </li>
 
-          <li class="has-submenu">
-            <a href="user-minhas-mudancas.html">
+          <li class="has-submenu" routerLinkActive="active">
+            <a routerLink="clients/my-changes">
               <i class="fe-truck"></i>Minhas Mudanças
             </a>
           </li>
 
-          <li class="has-submenu">
-            <a href="user-reportar-avaria.html">
+          <!-- <li class="has-submenu" routerLinkActive="active">
+            <a routerLink="clients/report-breakdowns">
               <i class="fe-zap-off"></i>Reportar Avaria
             </a>
-          </li>
-
-          <li class="has-submenu">
-            <a href="user-meus-dados.html">
-              <i class="fe-user-check"></i>Meus Dados
-            </a>
-          </li>
-
-          <li class="has-submenu">
-            <a href="#"> <i class="fe-log-out"></i>Sair </a>
-          </li>
+          </li> -->
         </ul>
 
         <div class="clearfix"></div>

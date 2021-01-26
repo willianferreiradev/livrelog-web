@@ -46,7 +46,7 @@ export class LoginComponent extends BaseForm implements OnInit, OnDestroy {
   submit(): void {
     this.form.get('cpf_cnpj').patchValue(this.formValue.email);
     this.authentication.login(this.formValue).subscribe(
-      () => this.router.navigate(['admin', 'dashboard']),
+      (user) => this.router.navigate([user.type === 'admin' ? 'admin' : `${user.type}s`, 'dashboard']),
       () => showToastError('Erro ao fazer login. Tente novamente', 'Erro!')
     );
   }

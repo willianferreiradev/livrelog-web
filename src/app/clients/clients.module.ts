@@ -6,16 +6,27 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedModule } from '@shared/shared.module';
 import { BudgetComponent } from './budget/budget.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxMaskModule } from 'ngx-mask';
+import { MyBudgetsComponent } from './my-budgets/my-budgets.component';
+import { MyChangesComponent } from './my-changes/my-changes.component';
+import { BreakdownsComponent } from './breakdowns/breakdowns.component';
 
 
 @NgModule({
-  declarations: [DashboardComponent, BudgetComponent],
+  declarations: [
+    DashboardComponent,
+    BudgetComponent,
+    MyBudgetsComponent,
+    MyChangesComponent,
+    BreakdownsComponent
+  ],
   imports: [
     CommonModule,
     ClientsRoutingModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule
   ]
 })
 export class ClientsModule { }

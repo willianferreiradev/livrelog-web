@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
+import { User } from '@shared/models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  login(loginData: any): Observable<unknown> {
+  login(loginData: any): Observable<User> {
     return this.http.post<any>(`${environment.api}auth/login`, loginData)
       .pipe(
         map(user => {

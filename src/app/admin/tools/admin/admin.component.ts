@@ -41,19 +41,7 @@ export class AdminComponent extends BaseForm implements OnInit, OnDestroy {
       title: `Lista de Administradores`,
       breadcrumb: ['Home', 'Ferramentas', 'Administradores']
     });
-    this.subscription = this.route.queryParams.pipe(switchMap(params => {
-      const page = params.page ?? 1;
-      this.perPage = params.perPage ?? 10;
-      this.filter = params.search ?? '';
-
-      if (this.filter) {
-        return this.usersService.search(page, this.perPage, this.filter, TypeUser.ADMIN);
-      }
-      return this.usersService.all(page, this.perPage, TypeUser.ADMIN);
-    })).subscribe(pagination => {
-      pagination.data = pagination.data.map(this.getUserWithPhoto);
-      this.datatableData = this.datatableService.getDatatableData(columns, pagination);
-    });
+    this.subscription = this.getAdmins();
 
     this.createForm();
   }
@@ -79,6 +67,7 @@ export class AdminComponent extends BaseForm implements OnInit, OnDestroy {
   submit(): void {
     this.usersService.createAdmin(this.formValue).subscribe(e => {
       showToastSuccess('Usuário cadastrado!', 'Salvo!');
+      this.getAdmins();
       this.modalService.dismissAll();
       this.reset();
     });
@@ -105,4 +94,19 @@ export class AdminComponent extends BaseForm implements OnInit, OnDestroy {
     return user;
   }
 
+  private getAdmins(): any {
+    return this.route.queryParams.pipe(switchMap(params => {
+      const page = params.page ?? 1;
+      this.perPage = params.perPage ?? 10;
+      this.filter = params.search ?? '';
+
+      if (this.filter) {
+        return this.usersService.search(page, this.perPage, this.filter, TypeUser.ADMIN);
+      }
+      return this.usersService.all(page, this.perPage, TypeUser.ADMIN);
+    })).subscribe(pagination => {
+      pagination.data = pagination.data.map(this.getUserWithPhoto);
+      this.datatableData = this.datatableService.getDatatableData(columns, pagination);
+    });
+  }
 }

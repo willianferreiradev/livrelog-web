@@ -2,7 +2,7 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="header-title">Relação de Orçamentos</h4>
+        <h4 class="header-title">Relação de Mudanças</h4>
         <app-datatable
           [columns]="datatableData?.columns"
           [paginationData]="datatableData?.paginationData"
@@ -31,58 +31,26 @@
     </div>
     <div class="modal-body">
       <div class="row bg-light pt-3 pl-3 pr-3">
-        <div class="col-md-2">
-          <app-text-to-modal
-            title="ID Orçamento"
-            [text]="selectedBudget?.id"
-          ></app-text-to-modal>
-        </div>
-        <div class="col-md-2">
-          <app-text-to-modal
-            title="ID Cliente"
-            [text]="selectedBudget?.client_id"
-          ></app-text-to-modal>
-        </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
           <app-text-to-modal
             title="Cliente"
-            [text]="selectedBudget?.client?.name"
+            [text]="selectedChange?.client?.name"
           ></app-text-to-modal>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
+          <app-text-to-modal
+            title="Cliente"
+            [text]="selectedChange?.transporter?.name"
+          ></app-text-to-modal>
+        </div>
+        <div class="col-md-4">
           <app-text-to-modal
             title="CPF"
-            [text]="selectedBudget?.client?.cpf_cnpj"
+            [text]="selectedChange?.budget?.date | date: 'dd/MM/yyyy'"
           ></app-text-to-modal>
-        </div>
-        <div class="col-md-2">
-          <app-text-to-modal
-            title="Criado em"
-            [text]="selectedBudget?.created_at | date: 'dd/MM/yyyy'"
-          ></app-text-to-modal>
-        </div>
-        <div class="col-md-2">
-          <div
-            class="form-group"
-            *ngIf="selectedBudget?.proposals.length > 0; else noProposals"
-          >
-            <label for="" class="control-label">Respondido por</label>
-            <select class="form-control">
-              <option *ngFor="let proposal of selectedBudget?.proposals">
-                {{ proposal?.transporter?.user?.name }} -
-                {{ proposal?.transporter?.name }}
-              </option>
-            </select>
-          </div>
-          <ng-template #noProposals>
-            <app-text-to-modal
-              title="Respondido por"
-              text="Sem repostas para esse orçamento"
-            ></app-text-to-modal>
-          </ng-template>
         </div>
       </div>
-      <div class="row mt-3" *ngIf="selectedBudget?.withdrawal">
+      <div class="row mt-3" *ngIf="selectedChange?.budget?.withdrawal">
         <div class="col-lg-12">
           <h5>Caracterisiticas da Mudança - RETIRADA</h5>
         </div>
@@ -90,25 +58,29 @@
         <div class="col-md-3">
           <app-text-to-modal
             title="Tipo de Local"
-            [text]="selectedBudget?.withdrawal?.type_building"
+            [text]="selectedChange?.budget?.withdrawal?.type_building"
           ></app-text-to-modal>
         </div>
         <div class="col-md-3">
           <app-text-to-modal
             title="Dormitórios"
-            [text]="selectedBudget?.withdrawal?.number_bedroom"
+            [text]="selectedChange?.budget?.withdrawal?.number_bedroom"
           ></app-text-to-modal>
         </div>
         <div class="col-md-3">
           <app-text-to-modal
             title="Elevador"
-            [text]="selectedBudget?.withdrawal?.has_elevator ? 'Sim' : 'Não'"
+            [text]="
+              selectedChange?.budget?.withdrawal?.has_elevator ? 'Sim' : 'Não'
+            "
           ></app-text-to-modal>
         </div>
         <div class="col-md-3">
           <app-text-to-modal
             title="Escadas"
-            [text]="selectedBudget?.withdrawal?.has_stairs ? 'Sim' : 'Não'"
+            [text]="
+              selectedChange?.budget?.withdrawal?.has_stairs ? 'Sim' : 'Não'
+            "
           ></app-text-to-modal>
         </div>
         <div class="col-md-3">
@@ -127,18 +99,22 @@
           <app-text-to-modal
             title="Desmontar"
             [text]="
-              selectedBudget?.withdrawal?.disassemble_furniture ? 'Sim' : 'Não'
+              selectedChange?.budget?.withdrawal?.disassemble_furniture
+                ? 'Sim'
+                : 'Não'
             "
           ></app-text-to-modal>
         </div>
         <div class="col-md-3">
           <app-text-to-modal
             title="Desmontar"
-            [text]="selectedBudget?.withdrawal?.pack_furniture ? 'Sim' : 'Não'"
+            [text]="
+              selectedChange?.budget?.withdrawal?.pack_furniture ? 'Sim' : 'Não'
+            "
           ></app-text-to-modal>
         </div>
       </div>
-      <div class="row mt-3" *ngIf="selectedBudget?.delivery">
+      <div class="row mt-3" *ngIf="selectedChange?.budget?.delivery">
         <div class="col-lg-12">
           <h5>Caracterisiticas da Mudança - ENTREGA</h5>
         </div>
@@ -146,25 +122,29 @@
         <div class="col-md-3">
           <app-text-to-modal
             title="Tipo de Local"
-            [text]="selectedBudget?.delivery?.type_building"
+            [text]="selectedChange?.budget?.delivery?.type_building"
           ></app-text-to-modal>
         </div>
         <div class="col-md-3">
           <app-text-to-modal
             title="Dormitórios"
-            [text]="selectedBudget?.delivery?.number_bedroom"
+            [text]="selectedChange?.budget?.delivery?.number_bedroom"
           ></app-text-to-modal>
         </div>
         <div class="col-md-3">
           <app-text-to-modal
             title="Elevador"
-            [text]="selectedBudget?.delivery?.has_elevator ? 'Sim' : 'Não'"
+            [text]="
+              selectedChange?.budget?.delivery?.has_elevator ? 'Sim' : 'Não'
+            "
           ></app-text-to-modal>
         </div>
         <div class="col-md-3">
           <app-text-to-modal
             title="Escadas"
-            [text]="selectedBudget?.delivery?.has_stairs ? 'Sim' : 'Não'"
+            [text]="
+              selectedChange?.budget?.delivery?.has_stairs ? 'Sim' : 'Não'
+            "
           ></app-text-to-modal>
         </div>
         <div class="col-md-3">
@@ -183,14 +163,18 @@
           <app-text-to-modal
             title="Desmontar"
             [text]="
-              selectedBudget?.delivery?.disassemble_furniture ? 'Sim' : 'Não'
+              selectedChange?.budget?.delivery?.disassemble_furniture
+                ? 'Sim'
+                : 'Não'
             "
           ></app-text-to-modal>
         </div>
         <div class="col-md-3">
           <app-text-to-modal
             title="Desmontar"
-            [text]="selectedBudget?.delivery?.pack_furniture ? 'Sim' : 'Não'"
+            [text]="
+              selectedChange?.budget?.delivery?.pack_furniture ? 'Sim' : 'Não'
+            "
           ></app-text-to-modal>
         </div>
       </div>
@@ -198,21 +182,21 @@
         <div class="col-lg-12">
           <h5>OBSERVAÇÕES DO CLIENTE</h5>
           <div class="alert alert-info fade show" role="alert">
-            {{ selectedBudget?.comments }}
+            {{ selectedChange?.budget?.comments }}
           </div>
         </div>
       </div>
       <div class="row mt-3">
         <div class="col-lg-12">
           <h5>Lista de itens a tranportar</h5>
-          <p>{{ selectedBudget?.inventory }}</p>
+          <p>{{ selectedChange?.budget?.inventory }}</p>
         </div>
       </div>
       <div class="row mt-3">
         <div class="col-md-12">
-          <h5 *ngIf="selectedBudget?.images">Imagens da Mudança</h5>
+          <h5 *ngIf="selectedChange?.budget?.images">Imagens da Mudança</h5>
           <img
-            *ngFor="let image of selectedBudget?.images"
+            *ngFor="let image of selectedChange?.budget?.images"
             [src]="storageLink + image.filename"
             class="img-fluid img-thumbnail m-2"
             width="190"

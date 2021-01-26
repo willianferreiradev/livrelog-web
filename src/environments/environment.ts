@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   site: 'https://livrelog.com.br',
-  api: 'http://127.0.0.1:8000/api/'
+  api: 'http://127.0.0.1:8000/api/',
+  storage: 'http://127.0.0.1:8000/storage/'
 };
 
 /*

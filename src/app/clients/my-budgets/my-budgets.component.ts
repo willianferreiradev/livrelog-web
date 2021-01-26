@@ -5,16 +5,16 @@ import { Budget } from '@shared/models/Budget';
 import { DatatableData } from '@shared/models/Datatable';
 import { TitlePageService } from '@shared/services/title-page.service';
 import { switchMap } from 'rxjs/operators';
-import { BudgetService } from './budget.service';
-import columns from './budget.columns';
+import { MyBudgetService } from './my-budget.service';
+import columns from './my-budget.columns';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '@environments/environment';
 @Component({
   selector: 'app-budgets',
-  templateUrl: './budgets.component.html',
-  styleUrls: ['./budgets.component.scss']
+  templateUrl: './my-budgets.component.html',
+  styleUrls: ['./my-budgets.component.scss']
 })
-export class BudgetsComponent implements OnInit {
+export class MyBudgetsComponent implements OnInit {
   datatableData: DatatableData<Budget>;
   perPage: number;
   filter = '';
@@ -23,7 +23,7 @@ export class BudgetsComponent implements OnInit {
 
   constructor(
     private title: TitlePageService,
-    private budgetService: BudgetService,
+    private budgetService: MyBudgetService,
     private route: ActivatedRoute,
     private router: Router,
     private datatableService: DatatableService<Budget>,
@@ -31,7 +31,7 @@ export class BudgetsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.title.titleSubject.next({ title: 'Relação de Orçamentos', breadcrumb: ['Home', 'Consultas', 'Orçamentos'] });
+    this.title.titleSubject.next({ title: 'Relação de Orçamentos', breadcrumb: ['Home', 'Meus Orçamentos'] });
     this.route.queryParams.pipe(switchMap(params => {
       const page = params.page ?? 1;
       this.perPage = params.perPage ?? 10;

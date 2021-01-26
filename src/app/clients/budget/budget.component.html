@@ -1,37 +1,28 @@
-<div class="row">
-  <div class="col-lg-12">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="header-title mb-3">Data e Endereço (retirada e entrega)</h4>
-        <p class="sub-header">
-          Nesta seção voce deve preencher a data correta, e se atentar a colocar
-          os endereços de retirada e entrega com os devidos complementos e CEP,
-          para as transportadoras parceiras possam forncer um orçamento correto,
-          evitando assim reajustes de velores na data da sua mudança!
-        </p>
-        <form>
+<form [formGroup]="form" (submit)="onSubmit()">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="header-title mb-3">
+            Data e Endereço (retirada e entrega)
+          </h4>
+          <p class="sub-header">
+            Nesta seção voce deve preencher a data correta, e se atentar a
+            colocar os endereços de retirada e entrega com os devidos
+            complementos e CEP, para as transportadoras parceiras possam forncer
+            um orçamento correto, evitando assim reajustes de velores na data da
+            sua mudança!
+          </p>
+
           <div class="row">
             <div class="col-lg-6">
               <div class="form-group">
                 <label>Data da Mudança</label>
-                <div>
-                  <div class="input-group">
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="mm/dd/yyyy"
-                      data-provide="datepicker"
-                      data-date-autoclose="true"
-                    />
-                    <div class="input-group-append">
-                      <span
-                        class="input-group-text bg-primary text-white border-primary"
-                        ><i class="mdi mdi-calendar"></i
-                      ></span>
-                    </div>
-                  </div>
-                  <!-- input-group -->
-                </div>
+                <input
+                  type="date"
+                  class="form-control"
+                  formControlName="date"
+                />
               </div>
             </div>
           </div>
@@ -47,25 +38,22 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="card">
-                <div class="card-body bg-soft-info">
+                <div class="card-body bg-soft-info" formGroupName="origin">
                   <div class="form-group">
                     <label for="">CEP do Endereço de Retirada</label>
                     <input
                       type="text"
                       class="form-control"
-                      id=""
-                      placeholder=""
-                      data-toggle="input-mask"
-                      data-mask-format="00000-000"
+                      formControlName="cep"
+                      mask="00000-000"
                     />
                   </div>
                   <div class="form-group">
-                    <label for="">Endereço de Retirada</label>
+                    <label for="">Endereço de Retirada (Rua)</label>
                     <input
                       type="text"
                       class="form-control"
-                      id=""
-                      placeholder=""
+                      formControlName="street"
                     />
                   </div>
                   <div class="form-group">
@@ -73,8 +61,7 @@
                     <input
                       type="text"
                       class="form-control"
-                      id=""
-                      placeholder=""
+                      formControlName="number"
                     />
                   </div>
                   <div class="form-group">
@@ -82,8 +69,7 @@
                     <input
                       type="text"
                       class="form-control"
-                      id=""
-                      placeholder=""
+                      formControlName="complement"
                     />
                   </div>
                   <div class="form-group">
@@ -91,8 +77,7 @@
                     <input
                       type="text"
                       class="form-control"
-                      id=""
-                      placeholder=""
+                      formControlName="neighborhood"
                     />
                   </div>
                   <div class="form-group">
@@ -100,8 +85,7 @@
                     <input
                       type="text"
                       class="form-control"
-                      id=""
-                      placeholder=""
+                      formControlName="city"
                     />
                   </div>
                   <div class="form-group">
@@ -109,8 +93,8 @@
                     <input
                       type="text"
                       class="form-control text-uppercase"
-                      id=""
-                      placeholder=""
+                      formControlName="state"
+                      mask="SS"
                     />
                   </div>
                 </div>
@@ -118,25 +102,25 @@
             </div>
             <div class="col-lg-6">
               <div class="card">
-                <div class="card-body bg-soft-primary">
+                <div
+                  class="card-body bg-soft-primary"
+                  formGroupName="destination"
+                >
                   <div class="form-group">
                     <label for="">CEP do Endereço de Retirada</label>
                     <input
                       type="text"
                       class="form-control"
-                      id=""
-                      placeholder=""
-                      data-toggle="input-mask"
-                      data-mask-format="00000-000"
+                      formControlName="cep"
+                      mask="00000-000"
                     />
                   </div>
                   <div class="form-group">
-                    <label for="">Endereço de Retirada</label>
+                    <label for="">Endereço de Retirada (Rua)</label>
                     <input
                       type="text"
                       class="form-control"
-                      id=""
-                      placeholder=""
+                      formControlName="street"
                     />
                   </div>
                   <div class="form-group">
@@ -144,8 +128,7 @@
                     <input
                       type="text"
                       class="form-control"
-                      id=""
-                      placeholder=""
+                      formControlName="number"
                     />
                   </div>
                   <div class="form-group">
@@ -153,8 +136,7 @@
                     <input
                       type="text"
                       class="form-control"
-                      id=""
-                      placeholder=""
+                      formControlName="complement"
                     />
                   </div>
                   <div class="form-group">
@@ -162,8 +144,7 @@
                     <input
                       type="text"
                       class="form-control"
-                      id=""
-                      placeholder=""
+                      formControlName="neighborhood"
                     />
                   </div>
                   <div class="form-group">
@@ -171,8 +152,7 @@
                     <input
                       type="text"
                       class="form-control"
-                      id=""
-                      placeholder=""
+                      formControlName="city"
                     />
                   </div>
                   <div class="form-group">
@@ -180,31 +160,30 @@
                     <input
                       type="text"
                       class="form-control text-uppercase"
-                      id=""
-                      placeholder=""
+                      formControlName="state"
+                      mask="SS"
                     />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-lg-12">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="header-title mb-3">Caracteristicas da Mudança</h4>
-        <p class="sub-header">
-          Assinale o maior numero de informações, pois toda informação inserida
-          aqui influencia no valor do orçamento, e informações omitidas aqui
-          serão agregadas o valor no ato da mudança.
-        </p>
-        <form>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="header-title mb-3">Caracteristicas da Mudança</h4>
+          <p class="sub-header">
+            Assinale o maior numero de informações, pois toda informação
+            inserida aqui influencia no valor do orçamento, e informações
+            omitidas aqui serão agregadas o valor no ato da mudança.
+          </p>
+
           <div class="row">
             <div class="col-lg-6">
               <h4 class="header-title mb-3">Endereço de Retirada</h4>
@@ -216,10 +195,13 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="card">
-                <div class="card-body bg-soft-info">
+                <div class="card-body bg-soft-info" formGroupName="withdrawal">
                   <div class="form-group">
                     <label for="">Tipo de Imóvel</label>
-                    <select class="form-control">
+                    <select
+                      class="form-control"
+                      formControlName="type_building"
+                    >
                       <option>--- Selecione ---</option>
                       <option>Casa Terrea</option>
                       <option>Casa Assobradada</option>
@@ -231,14 +213,13 @@
                   </div>
                   <div class="form-group">
                     <label for="">Quantidade de Dormitórios</label>
-                    <select class="form-control">
-                      <option>--- Selecione ---</option>
-                      <option>01</option>
-                      <option>02</option>
-                      <option>03</option>
-                      <option>04</option>
-                      <option>05</option>
-                      <option>+ de 05</option>
+                    <select
+                      class="form-control"
+                      formControlName="number_bedroom"
+                    >
+                      <option *ngFor="let number of numberBedroons">
+                        {{ number }}
+                      </option>
                     </select>
                   </div>
                   <div class="form-group">
@@ -250,17 +231,12 @@
                         <input
                           type="checkbox"
                           class="custom-control-input"
-                          id=""
+                          formControlName="has_elevator"
+                          id="hasElevator"
                         />
-                        <label class="custom-control-label" for="">Sim</label>
-                      </div>
-                      <div class="custom-control custom-checkbox col-3">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id=""
-                        />
-                        <label class="custom-control-label" for="">Não</label>
+                        <label class="custom-control-label" for="hasElevator"
+                          >Sim</label
+                        >
                       </div>
                     </div>
                   </div>
@@ -273,17 +249,12 @@
                         <input
                           type="checkbox"
                           class="custom-control-input"
-                          id=""
+                          formControlName="has_stairs"
+                          id="has_stairs"
                         />
-                        <label class="custom-control-label" for="">Sim</label>
-                      </div>
-                      <div class="custom-control custom-checkbox col-3">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id=""
-                        />
-                        <label class="custom-control-label" for="">Não</label>
+                        <label class="custom-control-label" for="has_stairs"
+                          >Sim</label
+                        >
                       </div>
                     </div>
                   </div>
@@ -296,17 +267,12 @@
                         <input
                           type="checkbox"
                           class="custom-control-input"
-                          id=""
+                          id="has_parking"
+                          formControlName="has_parking"
                         />
-                        <label class="custom-control-label" for="">Sim</label>
-                      </div>
-                      <div class="custom-control custom-checkbox col-3">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id=""
-                        />
-                        <label class="custom-control-label" for="">Não</label>
+                        <label class="custom-control-label" for="has_parking"
+                          >Sim</label
+                        >
                       </div>
                     </div>
                   </div>
@@ -319,17 +285,14 @@
                         <input
                           type="checkbox"
                           class="custom-control-input"
-                          id=""
+                          id="has_loading_unloading_area"
+                          formControlName="has_loading_unloading_area"
                         />
-                        <label class="custom-control-label" for="">Sim</label>
-                      </div>
-                      <div class="custom-control custom-checkbox col-3">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id=""
-                        />
-                        <label class="custom-control-label" for="">Não</label>
+                        <label
+                          class="custom-control-label"
+                          for="has_loading_unloading_area"
+                          >Sim</label
+                        >
                       </div>
                     </div>
                   </div>
@@ -342,17 +305,14 @@
                         <input
                           type="checkbox"
                           class="custom-control-input"
-                          id=""
+                          id="is_closed_condominium"
+                          formControlName="is_closed_condominium"
                         />
-                        <label class="custom-control-label" for="">Sim</label>
-                      </div>
-                      <div class="custom-control custom-checkbox col-3">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id=""
-                        />
-                        <label class="custom-control-label" for="">Não</label>
+                        <label
+                          class="custom-control-label"
+                          for="is_closed_condominium"
+                          >Sim</label
+                        >
                       </div>
                     </div>
                   </div>
@@ -365,17 +325,14 @@
                         <input
                           type="checkbox"
                           class="custom-control-input"
-                          id=""
+                          id="is_time_restriction"
+                          formControlName="is_time_restriction"
                         />
-                        <label class="custom-control-label" for="">Sim</label>
-                      </div>
-                      <div class="custom-control custom-checkbox col-3">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id=""
-                        />
-                        <label class="custom-control-label" for="">Não</label>
+                        <label
+                          class="custom-control-label"
+                          for="is_time_restriction"
+                          >Sim</label
+                        >
                       </div>
                     </div>
                   </div>
@@ -384,10 +341,13 @@
             </div>
             <div class="col-lg-6">
               <div class="card">
-                <div class="card-body bg-soft-primary">
+                <div class="card-body bg-soft-info" formGroupName="delivery">
                   <div class="form-group">
                     <label for="">Tipo de Imóvel</label>
-                    <select class="form-control">
+                    <select
+                      class="form-control"
+                      formControlName="type_building"
+                    >
                       <option>--- Selecione ---</option>
                       <option>Casa Terrea</option>
                       <option>Casa Assobradada</option>
@@ -399,14 +359,13 @@
                   </div>
                   <div class="form-group">
                     <label for="">Quantidade de Dormitórios</label>
-                    <select class="form-control">
-                      <option>--- Selecione ---</option>
-                      <option>01</option>
-                      <option>02</option>
-                      <option>03</option>
-                      <option>04</option>
-                      <option>05</option>
-                      <option>+ de 05</option>
+                    <select
+                      class="form-control"
+                      formControlName="number_bedroom"
+                    >
+                      <option *ngFor="let number of numberBedroons">
+                        {{ number }}
+                      </option>
                     </select>
                   </div>
                   <div class="form-group">
@@ -418,17 +377,12 @@
                         <input
                           type="checkbox"
                           class="custom-control-input"
-                          id=""
+                          formControlName="has_elevator"
+                          id="hasElevator2"
                         />
-                        <label class="custom-control-label" for="">Sim</label>
-                      </div>
-                      <div class="custom-control custom-checkbox col-3">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id=""
-                        />
-                        <label class="custom-control-label" for="">Não</label>
+                        <label class="custom-control-label" for="hasElevator2"
+                          >Sim</label
+                        >
                       </div>
                     </div>
                   </div>
@@ -441,17 +395,12 @@
                         <input
                           type="checkbox"
                           class="custom-control-input"
-                          id=""
+                          formControlName="has_stairs"
+                          id="has_stairs2"
                         />
-                        <label class="custom-control-label" for="">Sim</label>
-                      </div>
-                      <div class="custom-control custom-checkbox col-3">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id=""
-                        />
-                        <label class="custom-control-label" for="">Não</label>
+                        <label class="custom-control-label" for="has_stairs2"
+                          >Sim</label
+                        >
                       </div>
                     </div>
                   </div>
@@ -464,17 +413,12 @@
                         <input
                           type="checkbox"
                           class="custom-control-input"
-                          id=""
+                          id="has_parking2"
+                          formControlName="has_parking"
                         />
-                        <label class="custom-control-label" for="">Sim</label>
-                      </div>
-                      <div class="custom-control custom-checkbox col-3">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id=""
-                        />
-                        <label class="custom-control-label" for="">Não</label>
+                        <label class="custom-control-label" for="has_parking2"
+                          >Sim</label
+                        >
                       </div>
                     </div>
                   </div>
@@ -487,17 +431,14 @@
                         <input
                           type="checkbox"
                           class="custom-control-input"
-                          id=""
+                          id="has_loading_unloading_area2"
+                          formControlName="has_loading_unloading_area"
                         />
-                        <label class="custom-control-label" for="">Sim</label>
-                      </div>
-                      <div class="custom-control custom-checkbox col-3">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id=""
-                        />
-                        <label class="custom-control-label" for="">Não</label>
+                        <label
+                          class="custom-control-label"
+                          for="has_loading_unloading_area2"
+                          >Sim</label
+                        >
                       </div>
                     </div>
                   </div>
@@ -510,17 +451,14 @@
                         <input
                           type="checkbox"
                           class="custom-control-input"
-                          id=""
+                          id="is_closed_condominium2"
+                          formControlName="is_closed_condominium"
                         />
-                        <label class="custom-control-label" for="">Sim</label>
-                      </div>
-                      <div class="custom-control custom-checkbox col-3">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id=""
-                        />
-                        <label class="custom-control-label" for="">Não</label>
+                        <label
+                          class="custom-control-label"
+                          for="is_closed_condominium2"
+                          >Sim</label
+                        >
                       </div>
                     </div>
                   </div>
@@ -533,17 +471,14 @@
                         <input
                           type="checkbox"
                           class="custom-control-input"
-                          id=""
+                          id="is_time_restriction2"
+                          formControlName="is_time_restriction"
                         />
-                        <label class="custom-control-label" for="">Sim</label>
-                      </div>
-                      <div class="custom-control custom-checkbox col-3">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id=""
-                        />
-                        <label class="custom-control-label" for="">Não</label>
+                        <label
+                          class="custom-control-label"
+                          for="is_time_restriction2"
+                          >Sim</label
+                        >
                       </div>
                     </div>
                   </div>
@@ -551,22 +486,21 @@
               </div>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-lg-12">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="header-title mb-3">Serviços Extras</h4>
-        <p class="sub-header">
-          Se desejar algum dos serviços extras, basta assinalar as opções que
-          deseja abaixo.
-        </p>
-        <form>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="header-title mb-3">Serviços Extras</h4>
+          <p class="sub-header">
+            Se desejar algum dos serviços extras, basta assinalar as opções que
+            deseja abaixo.
+          </p>
+
           <div class="row">
             <div class="col-lg-6">
               <h4 class="header-title mb-3">Endereço de Retirada</h4>
@@ -578,7 +512,7 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="card">
-                <div class="card-body bg-soft-info">
+                <div class="card-body bg-soft-info" formGroupName="withdrawal">
                   <div class="form-group">
                     <label for="">Desmontar Móveis/Objetos?</label>
                     <div class="row">
@@ -588,17 +522,14 @@
                         <input
                           type="checkbox"
                           class="custom-control-input"
-                          id=""
+                          id="disassemble_furniture"
+                          formControlName="disassemble_furniture"
                         />
-                        <label class="custom-control-label" for="">Sim</label>
-                      </div>
-                      <div class="custom-control custom-checkbox col-3">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id=""
-                        />
-                        <label class="custom-control-label" for="">Não</label>
+                        <label
+                          class="custom-control-label"
+                          for="disassemble_furniture"
+                          >Sim</label
+                        >
                       </div>
                     </div>
                   </div>
@@ -611,17 +542,12 @@
                         <input
                           type="checkbox"
                           class="custom-control-input"
-                          id=""
+                          id="pack_furniture"
+                          formControlName="pack_furniture"
                         />
-                        <label class="custom-control-label" for="">Sim</label>
-                      </div>
-                      <div class="custom-control custom-checkbox col-3">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id=""
-                        />
-                        <label class="custom-control-label" for="">Não</label>
+                        <label class="custom-control-label" for="pack_furniture"
+                          >Sim</label
+                        >
                       </div>
                     </div>
                   </div>
@@ -630,7 +556,7 @@
             </div>
             <div class="col-lg-6">
               <div class="card">
-                <div class="card-body bg-soft-info">
+                <div class="card-body bg-soft-info" formGroupName="delivery">
                   <div class="form-group">
                     <label for="">Desembalar Móveis/Objetos?</label>
                     <div class="row">
@@ -640,17 +566,14 @@
                         <input
                           type="checkbox"
                           class="custom-control-input"
-                          id=""
+                          id="pack_furniture2"
+                          formControlName="pack_furniture"
                         />
-                        <label class="custom-control-label" for="">Sim</label>
-                      </div>
-                      <div class="custom-control custom-checkbox col-3">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id=""
-                        />
-                        <label class="custom-control-label" for="">Não</label>
+                        <label
+                          class="custom-control-label"
+                          for="pack_furniture2"
+                          >Sim</label
+                        >
                       </div>
                     </div>
                   </div>
@@ -663,17 +586,14 @@
                         <input
                           type="checkbox"
                           class="custom-control-input"
-                          id=""
+                          id="disassemble_furniture2"
+                          formControlName="disassemble_furniture"
                         />
-                        <label class="custom-control-label" for="">Sim</label>
-                      </div>
-                      <div class="custom-control custom-checkbox col-3">
-                        <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          id=""
-                        />
-                        <label class="custom-control-label" for="">Não</label>
+                        <label
+                          class="custom-control-label"
+                          for="disassemble_furniture2"
+                          >Sim</label
+                        >
                       </div>
                     </div>
                   </div>
@@ -681,18 +601,17 @@
               </div>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-lg-12">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="header-title mb-3">Inventário da Mudança</h4>
-        <form>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="header-title mb-3">Inventário da Mudança</h4>
+
           <div class="row">
             <div class="col-lg-12">
               <div class="form-group">
@@ -701,6 +620,18 @@
                   class="form-control"
                   rows="5"
                   placeholder="Liste aqui os móveis e objetos que serão transportados"
+                  formControlName="inventory"
+                ></textarea>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label for="">Obervações da mudança</label>
+                <textarea
+                  class="form-control"
+                  rows="5"
+                  placeholder="Comentários adicionais sobre a mudança"
+                  formControlName="comments"
                 ></textarea>
               </div>
             </div>
@@ -710,51 +641,32 @@
               <label for=""
                 >Envie as fotos dos móveis ou objetos a serem traansportados.
               </label>
-              <input type="file" class="dropify" data-height="300" multiple />
-
               <div class="row">
-                <div class="col-lg-4">
-                  <div class="mt-3">
-                    <input
-                      type="file"
-                      class="dropify"
-                      data-default-file="assets/images/small/img-2.jpg"
-                    />
-                    <p class="text-muted text-center mt-2 mb-0">Default File</p>
-                  </div>
+                <div class="col-lg-3" *ngFor="let image of showImages">
+                  <img [src]="image" alt="Imagem da casa" style="width: 100%" />
                 </div>
-
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                   <div class="mt-3">
-                    <input type="file" class="dropify" disabled="disabled" />
+                    <input type="file" (change)="upload($event)" />
                     <p class="text-muted text-center mt-2 mb-0">
-                      Disabled the input
-                    </p>
-                  </div>
-                </div>
-
-                <div class="col-lg-4">
-                  <div class="mt-3">
-                    <input
-                      type="file"
-                      class="dropify"
-                      data-max-file-size="3M"
-                    />
-                    <p class="text-muted text-center mt-2 mb-0">
-                      Max File size
+                      Enviar arquivo
                     </p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </form>
-        <p class="text-right">
-          <button class="btn btn-lg btn-primary align-items-end">
-            <i class="mdi mdi-content-save"></i> Salvar
-          </button>
-        </p>
+
+          <p class="text-right">
+            <button
+              class="btn btn-lg btn-primary align-items-end"
+              type="submit"
+            >
+              <i class="mdi mdi-content-save"></i> Salvar
+            </button>
+          </p>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</form>

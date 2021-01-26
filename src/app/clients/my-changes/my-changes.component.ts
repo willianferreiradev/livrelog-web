@@ -1,46 +1,48 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Data, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DatatableService } from '@shared/components/datatable/datatable.service';
-import { Budget } from '@shared/models/Budget';
 import { DatatableData } from '@shared/models/Datatable';
 import { TitlePageService } from '@shared/services/title-page.service';
 import { switchMap } from 'rxjs/operators';
-import { BudgetService } from './budget.service';
-import columns from './budget.columns';
+import { MyChangeService } from './my-change.service';
+import columns from './my-change.columns';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '@environments/environment';
+
 @Component({
-  selector: 'app-budgets',
-  templateUrl: './budgets.component.html',
-  styleUrls: ['./budgets.component.scss']
+  selector: 'app-my-changes',
+  templateUrl: './my-changes.component.html',
+  styleUrls: ['./my-changes.component.scss']
 })
-export class BudgetsComponent implements OnInit {
-  datatableData: DatatableData<Budget>;
+export class MyChangesComponent implements OnInit {
+  datatableData: DatatableData<any>;
   perPage: number;
   filter = '';
-  selectedBudget: Budget;
+
+  selectedChange: any;
+  selectedBudget: any;
   storageLink = `${environment.storage}houses/`;
 
   constructor(
     private title: TitlePageService,
-    private budgetService: BudgetService,
+    private moveService: MyChangeService,
     private route: ActivatedRoute,
     private router: Router,
-    private datatableService: DatatableService<Budget>,
+    private datatableService: DatatableService<any>,
     private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
-    this.title.titleSubject.next({ title: 'Relação de Orçamentos', breadcrumb: ['Home', 'Consultas', 'Orçamentos'] });
+    this.title.titleSubject.next({ title: 'Relação de Mudanças', breadcrumb: ['Home', 'Minhas Mudanças'] });
     this.route.queryParams.pipe(switchMap(params => {
       const page = params.page ?? 1;
       this.perPage = params.perPage ?? 10;
       this.filter = params.search ?? '';
 
       if (this.search) {
-        return this.budgetService.search(page, this.perPage, this.filter);
+        return this.moveService.search(page, this.perPage, this.filter);
       }
-      return this.budgetService.all(page, this.perPage);
+      return this.moveService.all(page, this.perPage);
     })).subscribe(pagination => {
       this.datatableData = this.datatableService.getDatatableData(columns, pagination);
     });
@@ -69,12 +71,13 @@ export class BudgetsComponent implements OnInit {
     this[event.function](content, budgets.find(i => i.id === event.params.id));
   }
 
-  openModal(content: any, budget: Budget): void {
-    this.selectedBudget = budget;
+  openModal(content: any, change: any): void {
+    this.selectedChange = change;
+    const budget = this.selectedChange.budget;
 
-    this.selectedBudget.withdrawal = budget.characteristics.find(c => c.type === 'withdrawal');
-    this.selectedBudget.delivery = budget.characteristics.find(c => c.type === 'delivery');
+    this.selectedChange.budget.withdrawal = budget.characteristics.find(c => c.type === 'withdrawal');
+    this.selectedChange.budget.delivery = budget.characteristics.find(c => c.type === 'delivery');
 
-    this.modalService.open(content, { size: 'full' }).result.then(() => this.selectedBudget = null);
+    this.modalService.open(content, { size: 'full' }).result.then(() => this.selectedChange = null);
   }
 }
