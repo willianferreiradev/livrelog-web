@@ -10,6 +10,7 @@ import { DashboardService } from 'src/app/admin/dashboard/dashboard.service';
 })
 export class DashboardComponent implements OnInit {
   informationBoxes = [];
+  proposals = [];
 
   constructor(
     private title: TitlePageService,
@@ -19,7 +20,26 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.title.titleSubject.next({ title: `Bem vindo ${this.auth.currentUserValue.name}`, breadcrumb: ['Home', 'Dashboard']});
-    this.dashboard.dashboardData().subscribe(data => this.informationBoxes = this.getInformationBoxes(data));
+    this.dashboard.dashboardData(this.auth.currentUserValue.id).subscribe(data => {
+      this.informationBoxes = this.getInformationBoxes(data);
+      this.proposals = data.proposalsList;
+    });
+  }
+
+  getLabelStatus(proposal: any): string {
+    if (proposal.changes) {
+      return 'badge-success';
+    }
+
+    return 'badge-purple';
+  }
+
+  getStatus(proposal: any): string {
+    if (proposal.changes) {
+      return 'Contratado';
+    }
+
+    return 'Em negociação';
   }
 
   getInformationBoxes(data): any {
@@ -35,7 +55,7 @@ export class DashboardComponent implements OnInit {
       },
       {
         title: 'Respostas a orçamentos',
-        number: data.changesToday,
+        number: data.proposals,
         subtitle: 'Enviados por transportadoras',
         colorClass: 'bg-info',
         icon: {
@@ -44,8 +64,8 @@ export class DashboardComponent implements OnInit {
       },
       {
         title: 'Você tem',
-        number: data.usersCreatedToday,
-        subtitle: 'Mudança contrada',
+        number: data.contractedChanges,
+        subtitle: 'Mudanças contradas',
         colorClass: 'bg-pink',
         icon: {
           name: ' mdi-truck-delivery'

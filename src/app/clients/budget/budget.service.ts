@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Budget } from '@shared/models/Budget';
 import { AuthenticationService } from '@shared/services/authentication.service';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -12,7 +13,7 @@ export class BudgetService {
 
   constructor(private http: HttpClient, private authService: AuthenticationService) { }
 
-  create(budget, images): Observable<any> {
+  create(budget: Budget, images: any): Observable<any> {
 
     const formData: FormData = new FormData();
     formData.append(`client_id`, this.authService.currentUserValue.id);

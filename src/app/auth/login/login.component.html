@@ -16,6 +16,12 @@
             </a>
           </div>
 
+          <div class="text-center">
+            <h3 style="color: #ffffff; font-weight: bold">
+              Fazer login como {{ loginByTypeUser }}
+            </h3>
+          </div>
+
           <form (submit)="onSubmit()" [formGroup]="form">
             <div class="form-group mb-3">
               <label
@@ -23,9 +29,10 @@
               </label>
               <input
                 class="form-control"
-                type="email"
-                placeholder="Seu email"
+                type="text"
+                [placeholder]="labelByTypeUser"
                 formControlName="email"
+                [mask]="dynamicMask"
               />
             </div>
 
@@ -52,6 +59,27 @@
                   ><span style="color: #fff">Lembrar-me</span></label
                 >
               </div>
+            </div>
+
+            <div class="mb-1" *ngIf="form.value.type_user != 'admin'">
+              <a class="link" routerLink="/" [queryParams]="{ type: 'admin' }"
+                >Fazer login como Admin <i class="fa fa-external-link-alt"></i
+              ></a>
+            </div>
+            <div class="mb-1" *ngIf="form.value.type_user != 'client'">
+              <a class="link" routerLink="/" [queryParams]="{ type: 'client' }"
+                >Fazer login como Cliente <i class="fa fa-external-link-alt"></i
+              ></a>
+            </div>
+
+            <div class="mb-1" *ngIf="form.value.type_user != 'transporter'">
+              <a
+                class="link"
+                routerLink="/"
+                [queryParams]="{ type: 'transporter' }"
+                >Fazer login como Transportadora
+                <i class="fa fa-external-link-alt"></i
+              ></a>
             </div>
 
             <div class="form-group text-center mb-3">

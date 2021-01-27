@@ -13,12 +13,14 @@ import { JwtInterceptor } from '@interceptors/jwt.interceptor';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
+import { ProfileComponent } from './profile/profile.component';
 registerLocaleData(localePt);
 @NgModule({
   declarations: [
     AppComponent,
+    ProfileComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -29,7 +31,8 @@ registerLocaleData(localePt);
     NgxSpinnerModule,
     BrowserAnimationsModule,
     FormsModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    ReactiveFormsModule,
   ],
   providers: [
     {

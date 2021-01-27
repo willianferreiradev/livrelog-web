@@ -22,6 +22,7 @@ export class MyChangesComponent implements OnInit {
   selectedChange: any;
   selectedBudget: any;
   storageLink = `${environment.storage}houses/`;
+  storageBreakdown = `${environment.storage}breakdowns/`;
 
   constructor(
     private title: TitlePageService,

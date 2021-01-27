@@ -194,13 +194,34 @@
       </div>
       <div class="row mt-3">
         <div class="col-md-12">
-          <h5 *ngIf="selectedChange?.budget?.photos">Imagens da Mudança</h5>
+          <h5 *ngIf="selectedBudget?.images">Imagens da Mudança</h5>
           <img
-            *ngFor="let photo of selectedChange?.budget?.photos"
-            [src]="photo"
+            *ngFor="let image of selectedBudget?.images"
+            [src]="storageLink + image.filename"
             class="img-fluid img-thumbnail m-2"
             width="190"
           />
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-12">
+          <h5 *ngIf="selectedChange?.breakdowns">Lista de avarias</h5>
+          <div class="row">
+            <div
+              class="col-2"
+              *ngFor="let breakdown of selectedChange?.breakdowns"
+            >
+              <p style="color: black; margin: 0; padding: 0">
+                {{ breakdown.name }}
+              </p>
+              {{ breakdown?.description || "" }}
+              <img
+                [src]="storageBreakdown + breakdown.image"
+                class="img-fluid img-thumbnail m-2"
+                style="width: 100%"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

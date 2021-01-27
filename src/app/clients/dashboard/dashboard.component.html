@@ -10,8 +10,87 @@
 </div>
 
 <div class="row">
-  <h4 class="header-title mb-3">Respostas ao seus orçamentos</h4>
-  <div class="table-responsive">
-    
+  <div class="col-xl-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="header-title mb-3">Respostas ao seus orçamentos</h4>
+        <div class="table-responsive">
+          <table
+            class="table mb-0"
+            style="
+              border-collapse: collapse;
+              border-spacing: 0;
+              width: 100% !important;
+            "
+          >
+            <thead>
+              <tr>
+                <th>Transportadora</th>
+                <th>Origem</th>
+                <th>Destino</th>
+                <th>Data</th>
+                <th>Valor Orçado</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let proposal of proposals">
+                <td>
+                  {{ proposal.transporter.user.name }} -
+                  {{ proposal.transporter.name }}
+                </td>
+                <td>{{ proposal.budget.origin.completed }}</td>
+                <td>{{ proposal.budget.destination.completed }}</td>
+                <td>{{ proposal.budget.date | date: "dd/MM/yyyy" }}</td>
+                <td>{{ proposal.price | currency: "BRL" }}</td>
+                <td>
+                  <span class="badge" [ngClass]="getLabelStatus(proposal)">{{
+                    getStatus(proposal)
+                  }}</span>
+                </td>
+                <td>
+                  <div
+                    class="btn-group"
+                    role="group"
+                    ngbDropdown
+                    container="body"
+                  >
+                    <button
+                      type="button"
+                      class="btn btn-primary dropdown-toggle"
+                      tabindex="0"
+                      role="button"
+                      ngbDropdownToggle
+                      id="dropdownActionProposal"
+                    >
+                      <i class="mdi mdi-dots-vertical"></i>
+                    </button>
+                    <div
+                      class="dropdown-men"
+                      aria-labelledby="dropdownActionProposal"
+                      ngbDropdownMenu
+                    >
+                      <a
+                        ngbDropdownItem
+                        class="dropdown-item"
+                        style="cursor: pointer"
+                        >Aceitar</a
+                      >
+                      <a
+                        ngbDropdownItem
+                        class="dropdown-item"
+                        style="cursor: pointer"
+                        >Recusar</a
+                      >
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

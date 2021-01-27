@@ -1,1 +1,238 @@
-<p>budgets works!</p>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="header-title">Relação de Orçamentos</h4>
+        <app-datatable
+          [columns]="datatableData?.columns"
+          [paginationData]="datatableData?.paginationData"
+          [filter]="filter"
+          (changeLengthRegisters)="changeLengthRegisters($event)"
+          (changePage)="changePage($event)"
+          (search)="search($event)"
+          (actionEvent)="seeData($event, content)"
+        ></app-datatable>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-content p-0 b-0">
+    <div class="card mb-0">
+      <div class="card-header bg-primary">
+        <button type="button" class="close" (click)="modal.close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="card-title text-white mb-0">
+          Informações sobre o Orçamento
+        </h4>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="row bg-light pt-3 pl-3 pr-3">
+        <div class="col-md-2">
+          <app-text-to-modal
+            title="Cliente"
+            [text]="selectedBudget?.client?.name"
+          ></app-text-to-modal>
+        </div>
+
+        <div class="col-md-2">
+          <app-text-to-modal
+            title="Criado em"
+            [text]="selectedBudget?.created_at | date: 'dd/MM/yyyy'"
+          ></app-text-to-modal>
+        </div>
+      </div>
+      <div class="row mt-3" *ngIf="selectedBudget?.withdrawal">
+        <div class="col-lg-12">
+          <h5>Caracterisiticas da Mudança - RETIRADA</h5>
+        </div>
+
+        <div class="col-md-3">
+          <app-text-to-modal
+            title="Tipo de Local"
+            [text]="selectedBudget?.withdrawal?.type_building"
+          ></app-text-to-modal>
+        </div>
+        <div class="col-md-3">
+          <app-text-to-modal
+            title="Dormitórios"
+            [text]="selectedBudget?.withdrawal?.number_bedroom"
+          ></app-text-to-modal>
+        </div>
+        <div class="col-md-3">
+          <app-text-to-modal
+            title="Elevador"
+            [text]="selectedBudget?.withdrawal?.has_elevator ? 'Sim' : 'Não'"
+          ></app-text-to-modal>
+        </div>
+        <div class="col-md-3">
+          <app-text-to-modal
+            title="Escadas"
+            [text]="selectedBudget?.withdrawal?.has_stairs ? 'Sim' : 'Não'"
+          ></app-text-to-modal>
+        </div>
+        <div class="col-md-3">
+          <app-text-to-modal
+            title="Estacionamento"
+            [text]="'Não'"
+          ></app-text-to-modal>
+        </div>
+        <div class="col-md-3">
+          <app-text-to-modal
+            title="Estacionamento"
+            [text]="'Não'"
+          ></app-text-to-modal>
+        </div>
+        <div class="col-md-3">
+          <app-text-to-modal
+            title="Desmontar"
+            [text]="
+              selectedBudget?.withdrawal?.disassemble_furniture ? 'Sim' : 'Não'
+            "
+          ></app-text-to-modal>
+        </div>
+        <div class="col-md-3">
+          <app-text-to-modal
+            title="Desmontar"
+            [text]="selectedBudget?.withdrawal?.pack_furniture ? 'Sim' : 'Não'"
+          ></app-text-to-modal>
+        </div>
+      </div>
+      <div class="row mt-3" *ngIf="selectedBudget?.delivery">
+        <div class="col-lg-12">
+          <h5>Caracterisiticas da Mudança - ENTREGA</h5>
+        </div>
+
+        <div class="col-md-3">
+          <app-text-to-modal
+            title="Tipo de Local"
+            [text]="selectedBudget?.delivery?.type_building"
+          ></app-text-to-modal>
+        </div>
+        <div class="col-md-3">
+          <app-text-to-modal
+            title="Dormitórios"
+            [text]="selectedBudget?.delivery?.number_bedroom"
+          ></app-text-to-modal>
+        </div>
+        <div class="col-md-3">
+          <app-text-to-modal
+            title="Elevador"
+            [text]="selectedBudget?.delivery?.has_elevator ? 'Sim' : 'Não'"
+          ></app-text-to-modal>
+        </div>
+        <div class="col-md-3">
+          <app-text-to-modal
+            title="Escadas"
+            [text]="selectedBudget?.delivery?.has_stairs ? 'Sim' : 'Não'"
+          ></app-text-to-modal>
+        </div>
+        <div class="col-md-3">
+          <app-text-to-modal
+            title="Estacionamento"
+            [text]="'Não'"
+          ></app-text-to-modal>
+        </div>
+        <div class="col-md-3">
+          <app-text-to-modal
+            title="Estacionamento"
+            [text]="'Não'"
+          ></app-text-to-modal>
+        </div>
+        <div class="col-md-3">
+          <app-text-to-modal
+            title="Desmontar"
+            [text]="
+              selectedBudget?.delivery?.disassemble_furniture ? 'Sim' : 'Não'
+            "
+          ></app-text-to-modal>
+        </div>
+        <div class="col-md-3">
+          <app-text-to-modal
+            title="Desmontar"
+            [text]="selectedBudget?.delivery?.pack_furniture ? 'Sim' : 'Não'"
+          ></app-text-to-modal>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-lg-12">
+          <h5>OBSERVAÇÕES DO CLIENTE</h5>
+          <div class="alert alert-info fade show" role="alert">
+            {{ selectedBudget?.comments }}
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-lg-12">
+          <h5>Lista de itens a tranportar</h5>
+          <p>{{ selectedBudget?.inventory }}</p>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-12">
+          <h5 *ngIf="selectedBudget?.images">Imagens da Mudança</h5>
+          <img
+            *ngFor="let image of selectedBudget?.images"
+            [src]="storageLink + image.filename"
+            class="img-fluid img-thumbnail m-2"
+            width="190"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-secondary waves-effect"
+        (click)="modal.close()"
+      >
+        Fechar
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #contentProposal let-modal>
+  <form class="modal-content p-0 b-0" [formGroup]="form" (submit)="onSubmit()">
+    <div class="card mb-0">
+      <div class="card-header bg-primary">
+        <button type="button" class="close" (click)="modal.close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="card-title text-white mb-0">
+          Fazer uma proposta para esse orçamento
+        </h4>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="" class="control-label">Valor</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="price"
+              currencyMask
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-secondary waves-effect"
+        (click)="modal.close()"
+      >
+        Fechar
+      </button>
+      <button type="submit" class="btn btn-info waves-effect waves-light">
+        <i class="mdi mdi-content-save-edit"></i> Salvar
+      </button>
+    </div>
+  </form>
+</ng-template>

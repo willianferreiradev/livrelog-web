@@ -16,6 +16,8 @@ import { showToastError } from '@shared/helpers/toastr';
 export class LoginComponent extends BaseForm implements OnInit, OnDestroy {
   siteUrl: string = environment.site;
   labelByTypeUser: string;
+  loginByTypeUser: string;
+  dynamicMask = '';
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -30,12 +32,15 @@ export class LoginComponent extends BaseForm implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.document.body.style.background = '#12214a';
     this.createForm();
-    this.route.queryParams.subscribe(params => {
-      if (!params.type) {
+    this.route.queryParams.subscribe(({type}) => {
+      this.reset();
+      if (!type) {
         return this.router.navigate([], { relativeTo: this.route, queryParams: { type: TypeUser.CLIENT } });
       }
-      this.form.get('type_user').patchValue(params.type);
-      this.labelByTypeUser = this.getLabelByTypeUser(params.type);
+      this.form.get('type_user').patchValue(type);
+      this.loginByTypeUser = this.getLoginByTypeUser(type);
+      this.labelByTypeUser = this.getLabelByTypeUser(type);
+      this.dynamicMask = this.getDynamicMask(type);
     });
   }
 
@@ -56,7 +61,7 @@ export class LoginComponent extends BaseForm implements OnInit, OnDestroy {
       cpf_cnpj: [null],
       email: [null],
       password: [null, Validators.required],
-      remember_me: [true, Validators.required],
+      remember_me: [true],
       type_user: [null, Validators.required]
     });
   }
@@ -74,4 +79,29 @@ export class LoginComponent extends BaseForm implements OnInit, OnDestroy {
       return 'Digite seu CPF';
     }
   }
+
+  getDynamicMask(typeUser): string {
+    if (typeUser === TypeUser.ADMIN || typeUser === TypeUser.CLIENT) {
+      return '';
+    }
+
+    if (typeUser === TypeUser.TRANSPORTER) {
+      return '00.000.000/0000-00';
+    }
+
+    if (typeUser === TypeUser.DRIVER) {
+      return '000.000.000-00';
+    }
+  }
+
+  private getLoginByTypeUser(type: string): string {
+    const types = {
+      admin: 'Admin',
+      client: 'Cliente',
+      transporter: 'Transportadora'
+    };
+
+    return types[type];
+  }
+
 }

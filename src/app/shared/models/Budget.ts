@@ -17,4 +17,6 @@ export interface Budget {
   withdrawal?: Characteristic;
   delivery?: Characteristic;
   photos: string[];
+  status: string;
+  proposals: any[];
 }

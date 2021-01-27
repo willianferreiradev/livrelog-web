@@ -17,7 +17,7 @@ export class JwtInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.loadeService.show();
     const currentUser: any = this.authenticationService.currentUserValue;
-    if (currentUser && currentUser.access_token) {
+    if (currentUser && currentUser.access_token && !request.url.includes('viacep')) {
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${currentUser?.access_token}`

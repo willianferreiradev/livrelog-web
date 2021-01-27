@@ -1,0 +1,9 @@
+::ng-deep ng-switchery {
+  .checkbox {
+    label {
+      &::before {
+        display: none !important;
+      }
+    }
+  }
+}

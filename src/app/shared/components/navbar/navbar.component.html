@@ -90,9 +90,10 @@
             role="button"
           >
             <img
-              src="assets/images/users/avatar-2.jpg"
+              [src]="image"
               alt="user-image"
               class="rounded-circle"
+              (error)="onError($event)"
             />
           </a>
           <div
@@ -104,14 +105,15 @@
               <h6 class="text-overflow m-0">Seja bem vindo!</h6>
             </div>
 
-            <!-- <a
-              href="cont-admin.html"
+            <a
               class="dropdown-item notify-item"
               ngbDropdownItem
+              routerLink="profile"
+              [queryParams]="{ id: user.id }"
             >
               <i class="fe-user"></i>
               <span>Meus Dados</span>
-            </a> -->
+            </a>
 
             <div class="dropdown-divider"></div>
 
@@ -261,11 +263,11 @@
             </a>
           </li>
 
-          <!-- <li class="has-submenu" routerLinkActive="active">
+          <li class="has-submenu" routerLinkActive="active">
             <a routerLink="clients/report-breakdowns">
               <i class="fe-zap-off"></i>Reportar Avaria
             </a>
-          </li> -->
+          </li>
         </ul>
 
         <div class="clearfix"></div>

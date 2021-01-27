@@ -79,7 +79,26 @@ export class DatatableComponent implements OnInit {
     return newParams;
   }
 
+  getStatus(value: string): string {
+    if (typeof value === 'number') {
+      if (value === 1) {
+        return 'ATIVO';
+      }
+
+      return 'INATIVO';
+    }
+
+    return value;
+  }
+
   getBadge(value: string): string {
+    if (typeof value === 'number')  {
+      if (value === 1) {
+        return 'badge-success';
+      }
+
+      return 'badge-danger';
+    }
     if (value === 'Sem respostas') {
       return 'badge-danger';
     } else if (value === 'Aguardando') {

@@ -78,6 +78,7 @@ export class AdminComponent extends BaseForm implements OnInit, OnDestroy {
       name: [null, Validators.required],
       phone: [null],
       email: [null, Validators.required],
+      password: [null, Validators.required]
     });
   }
 

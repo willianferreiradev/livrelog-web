@@ -1,9 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BaseForm } from '@shared/helpers/BaseForm';
 import { showToastError, showToastSuccess } from '@shared/helpers/toastr';
 import { TitlePageService } from '@shared/services/title-page.service';
+import { distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { BudgetService } from './budget.service';
+import { CepService } from '@services/cep.service';
+import { Observable } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-budget',
@@ -14,11 +19,15 @@ export class BudgetComponent extends BaseForm implements OnInit {
   numberBedroons = ['-- Selecione --', '01', '02', '03', '04', '05', '+ de 05'];
   images: string[] = [];
   showImages: string[] = [];
+  @ViewChild('content') newContent: ElementRef;
 
   constructor(
     private title: TitlePageService,
     private formBuilder: FormBuilder,
-    private budget: BudgetService
+    private budget: BudgetService,
+    private cepService: CepService,
+    private modalService: NgbModal,
+    private router: Router
   ) {
     super();
   }
@@ -26,6 +35,8 @@ export class BudgetComponent extends BaseForm implements OnInit {
   ngOnInit(): void {
     this.title.titleSubject.next({ title: 'Socilitar orçamento para mudanças', breadcrumb: ['Home', 'Solicitar Orçamento'] });
     this.createForm();
+    this.serachByCep('origin');
+    this.serachByCep('destination');
   }
 
 
@@ -42,19 +53,21 @@ export class BudgetComponent extends BaseForm implements OnInit {
   }
 
   submit(): void {
-    this.budget.create(this.formValue, this.images).subscribe(() => {
-      showToastSuccess('Orçamento cadastrado!', 'Salvo!');
+    this.budget.create(this.formRawValue, this.images).subscribe(() => {
+      this.openModal();
+      // showToastSuccess('Orçamento cadastrado!', 'Salvo!');
     });
   }
 
   private getAddressForm(): FormGroup {
+    const value = { value: null, disabled: true };
     return this.formBuilder.group({
       cep: [null, Validators.required],
       street: [null],
       complement: [null],
       neighborhood: [null],
-      city: [null, Validators.required],
-      state: [null, Validators.required],
+      city: [value, Validators.required],
+      state: [value, Validators.required],
       number: [null, Validators.required]
     });
   }
@@ -75,9 +88,7 @@ export class BudgetComponent extends BaseForm implements OnInit {
     });
   }
 
-  upload(event): void {
-    console.log(event.target.files[0]);
-
+  upload(event: any): void {
     if (event.target.files && event.target.files[0]) {
 
       const maxSize = 20971520;
@@ -97,5 +108,29 @@ export class BudgetComponent extends BaseForm implements OnInit {
       };
       reader.readAsDataURL(event.target.files[0]);
     }
+  }
+
+  populateCep(data: any, field: string): void {
+    this.form.get(field).patchValue({
+      street: data.logradouro,
+      neighborhood: data.bairro,
+      city: data.localidade,
+      state: data.uf,
+    });
+  }
+
+  private serachByCep(field: string): void {
+    this.form.get(`${field}.cep`).statusChanges
+      .pipe(
+        distinctUntilChanged(),
+        switchMap(status => status === 'VALID' ?
+          this.cepService.consultarCep(this.form.get(`${field}.cep`).value)
+          : new Observable(null))
+      )
+      .subscribe(data => data ? this.populateCep(data, field) : {});
+  }
+
+  openModal(): void {
+    this.modalService.open(this.newContent).result.then(() => this.router.navigate(['clients', 'my-budgets']));
   }
 }

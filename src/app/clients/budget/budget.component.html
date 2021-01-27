@@ -670,3 +670,28 @@
     </div>
   </div>
 </form>
+
+<ng-template #content let-modal>
+  <div class="modal-content p-0 b-0">
+    <div class="card mb-0">
+      <div class="card-header bg-primary">
+        <button type="button" class="close" (click)="modal.close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="card-title text-white mb-0">Aviso</h4>
+      </div>
+    </div>
+    <div class="modal-body">
+      <p>Seu orçamento foi criado, agora é só aguardar alguma resposta :)</p>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-secondary waves-effect"
+        (click)="modal.close()"
+      >
+        Ok
+      </button>
+    </div>
+  </div>
+</ng-template>

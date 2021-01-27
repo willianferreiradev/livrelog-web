@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { LogoutComponent } from './logout/logout.component';
     CommonModule,
     AuthRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxMaskModule
   ]
 })
 export class AuthModule { }

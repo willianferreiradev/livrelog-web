@@ -1,1 +1,323 @@
-<p>drivers works!</p>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="header-title">Lista de motoristas</h4>
+        <p class="text-right">
+          <button
+            class="btn btn-lg btn-primary align-items-end"
+            (click)="openModal(content)"
+          >
+            <i class="mdi mdi-plus-circle-outline"></i> Novo Motorista
+          </button>
+        </p>
+        <app-datatable
+          [columns]="datatableData?.columns"
+          [paginationData]="datatableData?.paginationData"
+          [filter]="filter"
+          (changeLengthRegisters)="changeLengthRegisters($event)"
+          (changePage)="changePage($event)"
+          (search)="search($event)"
+          (actionEvent)="seeData($event, content)"
+        ></app-datatable>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <form [formGroup]="form" (submit)="onSubmit()" class="modal-content p-0 b-0">
+    <div class="card mb-0">
+      <div class="card-header bg-primary">
+        <button type="button" class="close" (click)="modal.close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="card-title text-white mb-0">
+          Informações sobre o motorista
+        </h4>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-lg-5">
+              <h4 class="header-title">Foto</h4>
+              <p class="sub-header">
+                Selecione a foto do motorista no campo abaixo e visualize no
+                campo ao lado.
+              </p>
+              <div class="demo-box">
+                <div class="form-group mb-0">
+                  <p>Selecione a Foto</p>
+                  <input
+                    type="file"
+                    class="filestyle"
+                    data-btnClass="btn-primary"
+                    (change)="upload($event, 0)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <p class="demo-box mt-3 mt-lg-3">
+                <img
+                  [src]="images[0]"
+                  alt="image"
+                  class="img-fluid rounded"
+                  width="160"
+                  (error)="onError($event)"
+                />
+              </p>
+            </div>
+            <div class="col-lg-3">
+              <div class="demo-box text-center mt-3 mt-lg-3">
+                <div class="form-group">
+                  <label>Status</label><br />
+                  <ng-switchery
+                    formControlName="status"
+                    size="switchery-lg"
+                  ></ng-switchery>
+                  <p class="figure-caption">Inativo / Ativo</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <h4 class="header-title">Dados Pessoais</h4>
+          <p class="sub-header">
+            Preencha os campos abaixo para inciar o cadastro.
+          </p>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="demo-box">
+                <div class="form-group">
+                  <label for="">Nome Copleto</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="name"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="demo-box">
+                <div class="form-group">
+                  <label for="">CPF</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="000.000.000-00"
+                    formControlName="cpf_cnpj"
+                    mask="000.000.000-00"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="demo-box">
+                <div class="form-group">
+                  <label for="">CNH</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="cnh"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="demo-box">
+                <div class="form-group">
+                  <label for="">Categoria CNH</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="category_cnh"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="demo-box">
+                <div class="form-group">
+                  <label for="">Celular</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="(00) 00000-0000"
+                    formControlName="phone"
+                    mask="(00) 00000-0000"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="demo-box">
+                <div class="form-group">
+                  <label for="">Senha para acessar o aplicativo</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    formControlName="password"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end col -->
+
+      <div class="row">
+        <div class="col-sm-12">
+          <h4 class="header-title">Documentos Digitalizados</h4>
+          <p class="sub-header">Envie as fotos dos documentos do motorista.</p>
+          <hr />
+          <div class="row">
+            <div class="col-lg-3">
+              <h4 class="header-title">Frente do CPF</h4>
+              <p class="sub-header">
+                Selecione a foto do motorista no campo abaixo e visualize no
+                campo ao lado.
+              </p>
+              <div class="demo-box">
+                <div class="form-group mb-0">
+                  <p>Selecione a Foto</p>
+                  <input
+                    type="file"
+                    class="filestyle"
+                    data-btnClass="btn-primary"
+                    (change)="upload($event, 1)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <p class="demo-box mt-3 mt-lg-3">
+                <img
+                  [src]="images[1]"
+                  alt="image"
+                  class="img-fluid rounded"
+                  width="160"
+                  (error)="onError($event)"
+                />
+              </p>
+            </div>
+            <div class="col-lg-3">
+              <h4 class="header-title">Verso do CPF</h4>
+              <p class="sub-header">
+                Selecione a foto do motorista no campo abaixo e visualize no
+                campo ao lado.
+              </p>
+              <div class="demo-box">
+                <div class="form-group mb-0">
+                  <p>Selecione a Foto</p>
+                  <input
+                    type="file"
+                    class="filestyle"
+                    data-btnClass="btn-primary"
+                    (change)="upload($event, 2)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <p class="demo-box mt-3 mt-lg-3">
+                <img
+                  [src]="images[2]"
+                  alt="image"
+                  class="img-fluid rounded"
+                  width="160"
+                  (error)="onError($event)"
+                />
+              </p>
+            </div>
+          </div>
+          <!-- end row -->
+          <hr />
+          <div class="row">
+            <div class="col-lg-3">
+              <h4 class="header-title">Frente da CNH</h4>
+              <p class="sub-header">
+                Selecione a foto do motorista no campo abaixo e visualize no
+                campo ao lado.
+              </p>
+              <div class="demo-box">
+                <div class="form-group mb-0">
+                  <p>Selecione a Foto</p>
+                  <input
+                    type="file"
+                    class="filestyle"
+                    data-btnClass="btn-primary"
+                    (change)="upload($event, 3)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <p class="demo-box mt-3 mt-lg-3">
+                <img
+                  [src]="images[3]"
+                  alt="image"
+                  class="img-fluid rounded"
+                  width="160"
+                  (error)="onError($event)"
+                />
+              </p>
+            </div>
+            <div class="col-lg-3">
+              <h4 class="header-title">Verso da CNH</h4>
+              <p class="sub-header">
+                Selecione a foto do motorista no campo abaixo e visualize no
+                campo ao lado.
+              </p>
+              <div class="demo-box">
+                <div class="form-group mb-0">
+                  <p>Selecione a Foto</p>
+                  <input
+                    type="file"
+                    class="filestyle"
+                    data-btnClass="btn-primary"
+                    (change)="upload($event, 4)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <p class="demo-box mt-3 mt-lg-3">
+                <img
+                  [src]="images[4]"
+                  alt="image"
+                  class="img-fluid rounded"
+                  width="160"
+                  (error)="onError($event)"
+                />
+              </p>
+            </div>
+          </div>
+          <!-- end row -->
+        </div>
+        <!-- end col -->
+      </div>
+      <!-- end row -->
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-secondary waves-effect"
+        (click)="modal.close()"
+      >
+        Fechar
+      </button>
+      <button type="submit" class="btn btn-info waves-effect waves-light">
+        <i class="mdi mdi-content-save-edit"></i> Salvar
+      </button>
+    </div>
+  </form>
+</ng-template>

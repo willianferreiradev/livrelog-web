@@ -78,7 +78,7 @@
                     *ngSwitchCase="ColumnType.STATUS"
                     class="badge"
                     [ngClass]="getBadge(data[column.name])"
-                    >{{ data[column.name] }}</span
+                    >{{ getStatus(data[column.name]) }}</span
                   >
 
                   <span *ngSwitchCase="ColumnType.ACTION">
@@ -99,7 +99,12 @@
                       </button>
                     </div>
                     <ng-template #array>
-                      <div class="btn-group" role="group" ngbDropdown>
+                      <div
+                        class="btn-group"
+                        role="group"
+                        ngbDropdown
+                        container="body"
+                      >
                         <button
                           type="button"
                           class="btn btn-primary dropdown-toggle"

@@ -7,6 +7,7 @@ import { switchMap } from 'rxjs/operators';
 import { MoveService } from './move.service';
 import columns from './move.columns';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-moves',
@@ -17,6 +18,7 @@ export class MovesComponent implements OnInit {
   datatableData: DatatableData<any>;
   perPage: number;
   filter = '';
+  storageLink = `${environment.storage}houses/`;
 
   selectedChange: any;
   selectedBudget: any;

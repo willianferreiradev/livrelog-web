@@ -1,1 +1,118 @@
-<p>breakdowns works!</p>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="header-title">Lista de avarias</h4>
+        <app-datatable
+          [columns]="datatableData?.columns"
+          [paginationData]="datatableData?.paginationData"
+          [filter]="filter"
+          (changeLengthRegisters)="changeLengthRegisters($event)"
+          (changePage)="changePage($event)"
+          (search)="search($event)"
+          (actionEvent)="seeData($event, content)"
+        ></app-datatable>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-content p-0 b-0">
+    <div class="card mb-0">
+      <div class="card-header bg-primary">
+        <button type="button" class="close" (click)="modal.close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="card-title text-white mb-0">Informações sobre as avarias</h4>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="row bg-light pt-3 pl-3 pr-3">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="" class="control-label">Data da Mudança</label>
+            <input
+              type="text"
+              class="form-control-plaintext"
+              [value]="selectedChange?.budget?.date | date: 'dd/MM/yyyy'"
+              readonly=""
+            />
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="" class="control-label">Cliente</label>
+            <input
+              type="text"
+              class="form-control-plaintext"
+              [value]="selectedChange?.budget?.client?.name"
+              readonly=""
+            />
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="" class="control-label">Celular do Cliente</label>
+            <input
+              type="text"
+              class="form-control-plaintext"
+              [value]="selectedChange?.budget?.client?.phone"
+              readonly=""
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-lg-12">
+          <div class="form-group">
+            <label for="">Responda ao Cliente</label>
+            <textarea
+              [(ngModel)]="message"
+              class="form-control"
+              rows="5"
+              placeholder="Escreve aqui sua mensagem ou parecer sobre a avaria após analisar as imagens enviadas pelo cliente"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-12">
+          <h5 *ngIf="selectedChange?.breakdowns">Lista de avarias</h5>
+          <div class="row">
+            <div
+              class="col-2"
+              *ngFor="let breakdown of selectedChange?.breakdowns"
+            >
+              <p style="color: black; margin: 0; padding: 0">
+                {{ breakdown.name }}
+              </p>
+              {{ breakdown?.description || "" }}
+              <img
+                [src]="storageBreakdown + breakdown.image"
+                class="img-fluid img-thumbnail m-2"
+                style="width: 100%"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-secondary waves-effect"
+        (click)="modal.close()"
+      >
+        Fechar
+      </button>
+      <button
+        type="click"
+        class="btn btn-info waves-effect waves-light"
+        (click)="saveMessage()"
+      >
+        <i class="mdi mdi-content-save-edit"></i> Salvar
+      </button>
+    </div>
+  </div>
+</ng-template>

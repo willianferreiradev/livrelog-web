@@ -10,6 +10,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { MyBudgetsComponent } from './my-budgets/my-budgets.component';
 import { MyChangesComponent } from './my-changes/my-changes.component';
 import { BreakdownsComponent } from './breakdowns/breakdowns.component';
+import { NgbDropdownModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -26,7 +27,9 @@ import { BreakdownsComponent } from './breakdowns/breakdowns.component';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxMaskModule
+    NgxMaskModule,
+    NgbDropdownModule,
+    NgbModalModule
   ]
 })
 export class ClientsModule { }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from '@environments/environment';
 import { TypeUser } from '@shared/enums/TypeUser';
 import { User } from '@shared/models/User';
 import { AuthenticationService } from '@shared/services/authentication.service';
@@ -16,6 +17,8 @@ export class NavbarComponent implements OnInit {
   TypeUser = TypeUser;
   user: User;
   expandedMenu = false;
+  storageLink = `${environment.storage}users/`;
+  image = this.storageLink;
 
   constructor(
     private navbarService: NavbarService,
@@ -25,15 +28,18 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.data = this.navbarService.getMockData();
-    this.authService.currentUser.subscribe(e => this.user = e);
+    this.authService.currentUser.subscribe(e => {
+      this.user = e;
+      this.image += `${e.id}.png`;
+    });
   }
 
   logout(): void {
     localStorage.clear();
-    this.router.navigate(['auth', 'logout']);
+    this.router.navigate(['auth', 'logout'], { queryParams: { type: this.authService.currentUserValue.type } });
   }
 
-  openMenu() {
+  openMenu(): void {
     this.expandedMenu = !this.expandedMenu;
     const navigation = document.querySelector('#navigation');
     const lines = document.querySelector('#lines');
@@ -49,5 +55,9 @@ export class NavbarComponent implements OnInit {
     }
     navigation.setAttribute('style', styles);
     submenus.forEach(submenu => submenu.setAttribute('style', styles));
+  }
+
+  onError(event: any): void {
+    event.target.src = 'assets/images/users/no-user.jpg';
   }
 }
