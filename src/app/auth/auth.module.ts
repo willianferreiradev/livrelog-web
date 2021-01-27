@@ -6,10 +6,11 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { CreateAccountComponent } from './create-account/create-account.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, LogoutComponent],
+  declarations: [LoginComponent, LogoutComponent, CreateAccountComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,

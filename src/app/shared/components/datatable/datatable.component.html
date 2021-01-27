@@ -61,6 +61,7 @@
                     *ngSwitchCase="ColumnType.PHOTO"
                     [src]="data[column.name]"
                     style="width: 60px"
+                    (error)="onError($event)"
                   />
                   <span *ngSwitchCase="ColumnType.CREATED_AT">{{
                     data[column.name] | date: "dd/MM/yyyy"

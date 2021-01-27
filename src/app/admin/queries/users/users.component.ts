@@ -9,6 +9,7 @@ import { DatatableData } from '@models/Datatable';
 import columns from './user.columns';
 import { Subscription } from 'rxjs';
 import { TitlePageService } from '@shared/services/title-page.service';
+import { environment } from '@environments/environment';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -19,6 +20,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   perPage: number;
   filter = '';
   subscription: Subscription;
+  storageLink = `${environment.storage}/users/`;
 
   constructor(
     private usersService: UsersService,
@@ -40,7 +42,7 @@ export class UsersComponent implements OnInit, OnDestroy {
       }
       return this.usersService.all(page, this.perPage);
     })).subscribe(pagination => {
-      pagination.data = pagination.data.map(this.getUserWithPhoto);
+      pagination.data = pagination.data.map(user => this.getUserWithPhoto(user));
       this.datatableData = this.datatableService.getDatatableData(columns, pagination);
     });
   }
@@ -68,7 +70,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   private getUserWithPhoto(user: User): User {
-    user.photo = 'assets/images/users/avatar-1.jpg';
+    user.photo = `${this.storageLink}${user.id}.png`;
     return user;
   }
 }

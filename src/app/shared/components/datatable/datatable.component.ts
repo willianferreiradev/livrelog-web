@@ -79,6 +79,10 @@ export class DatatableComponent implements OnInit {
     return newParams;
   }
 
+  onError(event) {
+    event.target.src = 'assets/images/no-image.png';
+  }
+
   getStatus(value: string): string {
     if (typeof value === 'number') {
       if (value === 1) {

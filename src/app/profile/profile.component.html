@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <form
+          [formGroup]="form"
+          class="row"
+          (submit)="onSubmit()"
+          *ngIf="typeUser != 'transporter'"
+        >
+          <div class="form-group col-12 col-sm-2">
+            <img
+              class="img mb-1"
+              [src]="image"
+              (error)="onError($event)"
+              alt="Imagem do usuário"
+            />
+            <input type="file" (change)="upload($event)" />
+          </div>
+          <div class="col-10">
+            <div class="row">
+              <div class="form-group col-12 col-sm-4">
+                <label class="label">Nome</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                />
+              </div>
+              <div class="form-group col-4">
+                <label class="label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  formControlName="email"
+                />
+              </div>
+              <div class="form-group col-4">
+                <label class="label">CPF</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="cpf_cnpj"
+                  mask="000.000.000-00"
+                />
+              </div>
+              <div class="form-group col-4">
+                <label class="label">Celular</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="phone"
+                  mask="(00) 00000-0000"
+                />
+              </div>
+              <div class="form-group col-4">
+                <label class="label">Tipo</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="type"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary float-right">
+              Salvar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
