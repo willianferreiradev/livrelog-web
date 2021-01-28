@@ -34,6 +34,10 @@ export class AuthenticationService {
         }));
   }
 
+  signin(formValue: any): Observable<any> {
+    return this.http.post(`${environment.api}auth/signup`, formValue);
+  }
+
   logout(): void {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('clinic');

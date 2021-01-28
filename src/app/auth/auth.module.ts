@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { CreateAccountComponent } from './create-account/create-account.component';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { CreateAccountComponent } from './create-account/create-account.componen
     AuthRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    NgxMaskModule
+    NgxMaskModule,
+    NgbModalModule
   ]
 })
 export class AuthModule { }

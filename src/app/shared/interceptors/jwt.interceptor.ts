@@ -26,7 +26,17 @@ export class JwtInterceptor implements HttpInterceptor {
     }
 
     return next.handle(request).pipe(
-      catchError(() => {
+      catchError(({error : { message }}) => {
+        if (message === 'User not actived') {
+          showToastError('Seu usuário não foi ativado.', 'Ops...');
+          return of(null);
+        }
+
+        if (message === 'Unauthorized') {
+          showToastError('Email ou senha incorretos.', 'Ops...');
+          return of(null);
+        }
+
         showToastError('Ocorreu um erro na requisição', 'Ops...');
         return of(null);
       }),
