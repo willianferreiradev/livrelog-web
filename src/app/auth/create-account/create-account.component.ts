@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from '@environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BaseForm } from '@shared/helpers/BaseForm';
 import { AuthenticationService } from '@shared/services/authentication.service';
@@ -13,6 +14,7 @@ import { AuthenticationService } from '@shared/services/authentication.service';
 export class CreateAccountComponent extends BaseForm implements OnInit {
   type = 'client';
   @ViewChild('content') contentRef: ElementRef;
+  siteUrl: string = environment.site;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
